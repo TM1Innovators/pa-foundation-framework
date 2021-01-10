@@ -1,0 +1,4 @@
+﻿FILE_FORMAT=100
+ENTRYNAME=04. Add or Remove Cube Versions (Edit)
+ENTRYTYPE=dimension
+ENTRYREFERENCE=TM1:///DIMENSION/PUBLIC/BLD Cube Version

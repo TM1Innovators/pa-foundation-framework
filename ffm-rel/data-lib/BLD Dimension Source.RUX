@@ -1,0 +1,105 @@
+﻿FORMAT==100
+['Action', 'All Hierarchy Level'] = S: STET;
+
+[] = S:
+	IF(
+		DB('BLD Dimension Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,'All Hierarchy Level'
+			,'Action') @= ''
+		,STET
+		,CONTINUE);
+
+['Action', 'All Hierarchy Level'] = N: STET;
+
+[] = N:
+	IF(
+		DB('BLD Dimension Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,'All Hierarchy Level'
+			,'Action') @= ''
+		,STET
+		,CONTINUE);
+
+['Hierarchy Count', 'All Hierarchy Level'] = N:
+	['Total Hierarchy Level'];
+
+['Hierarchy Count'] = N:
+	IF(
+		DB('BLD Dimension Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,!BLD Hierarchy Level
+			,'Hierarchy Element Format String') @<> ''
+		,1
+		,0);
+
+[{'Dimension Name', 'Dimension Type'}, 'Primary', 'All Hierarchy Level'] = S:
+	STET;
+
+#[{'Dimension Name', 'Dimension Type'}, 'All Hierarchy Level'] = S:
+#	'';
+
+[{'Dimension Name', 'Dimension Type'}, 'All Hierarchy Level'] = S:
+	IF(
+		DB('BLD Dimension Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,!BLD Hierarchy Level
+			,'Action') @= ''
+		,STET
+		,CONTINUE);
+
+[{'Dimension Name', 'Dimension Type'}, 'All Hierarchy Level'] = S:
+	DB('BLD Dimension Source'
+		,!BLD Dimension List
+		,'Primary'
+		,!BLD Dimension Version
+		,!BLD Hierarchy Level
+		,!BLD Dimension Source Measure);
+
+['Primary', 'Hierarchy Name'] = S: '';
+#	DB('BLD Dimension Source'
+#		,!BLD Dimension List
+#		,!BLD Hierarchy List
+#		,!BLD Dimension Version
+#		,!BLD Hierarchy Level
+#		,'Dimension Name');
+
+['All Hierarchy Level'] = S:
+	IF(
+		ATTRS('BLD Dimension Source Measure'
+			,!BLD Dimension Source Measure
+			,'Input At All Hierarchy Level') @= 'Yes'
+		,STET
+		,CONTINUE);
+
+['All Hierarchy Level'] = S:
+	IF(
+		ATTRS('BLD Dimension Source Measure'
+			,!BLD Dimension Source Measure
+			,'Input At All Hierarchy Level') @= 'No'
+		,''
+		,CONTINUE);
+
+[] = S:
+	IF(
+		ATTRS('BLD Dimension Source Measure'
+			,!BLD Dimension Source Measure
+			,'Input Per Hierarchy Level') @= 'Yes'
+		,STET
+		,CONTINUE);
+
+[] = S:
+	IF(
+		ATTRS('BLD Dimension Source Measure'
+			,!BLD Dimension Source Measure
+			,'Input Per Hierarchy Level') @= 'No'
+		,''
+		,CONTINUE);

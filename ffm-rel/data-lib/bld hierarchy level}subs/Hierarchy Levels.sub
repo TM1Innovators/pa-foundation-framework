@@ -1,0 +1,17 @@
+﻿283,100
+284,"Hierarchy Levels"
+11,20201213024543
+274,
+18,0
+275,122
+{TM1FILTERBYLEVEL ( {EXCEPT({TM1SUBSETALL( [BLD Hierarchy Level] )}, {[BLD Hierarchy Level].[All Hierarchy Level]})}, 0) }
+278,0
+281,0
+270,7
+All Hierarchy Level
+Hierarchy Level 001
+Hierarchy Level 002
+Hierarchy Level 003
+Hierarchy Level 004
+Hierarchy Level 005
+Hierarchy Level 006

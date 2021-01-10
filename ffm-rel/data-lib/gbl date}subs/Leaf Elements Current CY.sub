@@ -1,0 +1,10 @@
+﻿283,100
+284,"Leaf Elements Current CY"
+11,20201206133625
+274,Display Name
+18,0
+275,200
+{ TM1SORTBYINDEX( { FILTER( {TM1SUBSETALL( [GBL Date] )}, [GBL Date].[CAL Year] = [SYS Control].([SYS Control Environment].[Current Environment], [SYS Control Measure].[Current CAL Year] ) )}, ASC ) }
+278,0
+281,0
+270,0

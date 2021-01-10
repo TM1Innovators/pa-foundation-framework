@@ -1,0 +1,153 @@
+﻿FORMAT==100
+#Region System
+FEEDSTRINGS;
+SKIPCHECK;
+#EndRegion
+
+['Summary','Finish Time'] = N: STET;
+
+['Finish Time'] = N:
+	IF(
+		DB('ADM Log Message'
+			,!GBL Date
+			,!ADM Log Source
+			,!ADM Log Entry
+			,!ADM Log Line
+			,'Message') @= ''
+		,STET
+		,CONTINUE);
+
+['Finish Time'] = N:
+	IF(
+		DB('ADM Log Message'
+			,!GBL Date
+			,!ADM Log Source
+			,!ADM Log Entry
+			,ATTRS('ADM Log Line', !ADM Log Line, 'Next Line')
+			,'Message') @<> ''
+		,DB('ADM Log Message'
+			,!GBL Date
+			,!ADM Log Source
+			,!ADM Log Entry
+			,ATTRS('ADM Log Line', !ADM Log Line, 'Next Line')
+			,'Start Time')
+		,DB('ADM Log Message'
+			,!GBL Date
+			,!ADM Log Source
+			,!ADM Log Entry
+			,'Summary'
+			,'Finish Time'));
+
+['Duration (Seconds)'] = N:
+	IF(
+		['Finish Time'] <> 0
+		,(['Finish Time'] - ['Start Time'])*24*60*60
+		,0);
+
+['Duration (Text)'] = S:
+	IF(
+		['Start Time'] <> 0
+		,CONTINUE
+		,'');
+
+['Duration (Text)'] = S:
+	IF(
+		DB('ADM Log Message'
+			,!GBL Date
+			,!ADM Log Source
+            ,!ADM Log Entry
+			,!ADM Log Line
+			,'Duration (Seconds)') < 1,
+		TRIM(STR(
+			DB('ADM Log Message'
+                ,!GBL Date
+                ,!ADM Log Source
+				,!ADM Log Entry
+				,!ADM Log Line
+				,'Duration (Seconds)') * 1000, 15, 0)) | ' ms'
+		,CONTINUE);
+
+['Duration (Text)'] = S:
+	IF(
+		DB('ADM Log Message'
+			,!GBL Date
+			,!ADM Log Source
+			,!ADM Log Entry
+			,!ADM Log Line
+			,'Duration (Seconds)') < 60
+		,TRIM(STR(
+			DB('ADM Log Message'
+                ,!GBL Date
+                ,!ADM Log Source
+				,!ADM Log Entry
+				,!ADM Log Line
+				,'Duration (Seconds)'), 15, 0)) | ' sec'
+		,CONTINUE);
+
+['Duration (Text)'] = S:
+	IF(
+		DB('ADM Log Message'
+			,!GBL Date
+			,!ADM Log Source
+			,!ADM Log Entry
+			,!ADM Log Line
+			,'Duration (Seconds)') < (60 * 60)
+		,TRIM(STR(
+			DB('ADM Log Message'
+                ,!GBL Date
+                ,!ADM Log Source
+				,!ADM Log Entry
+				,!ADM Log Line
+				,'Duration (Seconds)') / 60, 15, 1)) | ' min'
+		,CONTINUE);
+
+['Duration (Text)'] = S:
+	IF(
+		DB('ADM Log Message'
+			,!GBL Date
+			,!ADM Log Source
+			,!ADM Log Entry
+			,!ADM Log Line
+			,'Duration (Seconds)') < (24 * 60 * 60)
+		,TRIM(STR(
+			DB('ADM Log Message'
+                ,!GBL Date
+                ,!ADM Log Source
+				,!ADM Log Entry
+				,!ADM Log Line
+				,'Duration (Seconds)')/(60 * 60), 15, 1)) | ' hr'
+		,CONTINUE);
+
+['Duration (Text)'] = S:
+	TRIM(STR(
+		DB('ADM Log Message'
+			,!GBL Date
+			,!ADM Log Source
+			,!ADM Log Entry
+			,!ADM Log Line
+			,'Duration (Seconds)')/(60 * 60 * 24), 15, 1)) | ' day';
+
+['Message Count', 'Total Line'] = N: STET;
+
+['Message Count', 'Summary'] = N:
+	['Message Count', 'Total Line'];
+
+['Message Count'] = N:
+	IF(
+		DB('ADM Log Message'
+			,!GBL Date
+			,!ADM Log Source
+			,!ADM Log Entry
+			,!ADM Log Line
+			,'Message Type') @<> ''
+		,1
+		,0);
+
+FEEDERS;
+
+['Message Type'] =>
+	['Message Count'];
+
+['Start Time'] =>
+	['Duration (Seconds)']
+	,['Duration (Text)'];

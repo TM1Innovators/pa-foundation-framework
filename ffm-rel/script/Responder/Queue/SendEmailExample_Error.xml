@@ -1,0 +1,8 @@
+<Notification>
+  <property name="NotificationHandlerList" value="TemplatedEmailNotifier" />
+  <property name="EventID" value="TM1 Process Error" />
+  <property name="HeaderText" value="Error in process: [Process Name]" />
+  <property name="Message" value="The system encountered an error during [Some Activity]. The process [Process Name] failed with the following status: 0. Please contact your system administrator to troubleshoot the issue." />
+  <property name="ButtonLink" value="http://google.com" />
+  <property name="MoreLink" value="http://google.com" />
+</Notification>

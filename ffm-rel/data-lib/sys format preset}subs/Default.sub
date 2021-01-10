@@ -1,0 +1,10 @@
+﻿283,100
+284,"Default"
+11,20201012041036
+274,Display_Name
+18,0
+275,188
+{ORDER({TM1DRILLDOWNMEMBER( { HIERARCHIZE( {TM1SUBSETALL( [SYS Format Preset] )} ) }, ALL, RECURSIVE )}, STRTOVALUE('0' + [SYS Format Preset].CurrentMember.Properties('Sort_Index')), ASC)}
+278,0
+281,0
+270,0

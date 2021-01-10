@@ -1,0 +1,11 @@
+﻿283,100
+284,"Selected Environment"
+11,20201109034528
+274,
+18,0
+275,160
+{ StrToMember( '[SYS Control Environment].[' + [SYS Control].([SYS Control Environment].[Current Environment], [SYS Control Measure].[Server Details]) + ']' ) }
+278,0
+281,0
+270,1
+Current Environment

@@ -1,0 +1,60 @@
+﻿283,100
+284,"N-Level"
+11,20200407045609
+274,
+18,0
+275,62
+{TM1FILTERBYLEVEL( {TM1SUBSETALL( [BLD Attribute List] )}, 0)}
+278,0
+281,0
+270,50
+Attribute 001
+Attribute 002
+Attribute 003
+Attribute 004
+Attribute 005
+Attribute 006
+Attribute 007
+Attribute 008
+Attribute 009
+Attribute 010
+Attribute 011
+Attribute 012
+Attribute 013
+Attribute 014
+Attribute 015
+Attribute 016
+Attribute 017
+Attribute 018
+Attribute 019
+Attribute 020
+Attribute 021
+Attribute 022
+Attribute 023
+Attribute 024
+Attribute 025
+Attribute 026
+Attribute 027
+Attribute 028
+Attribute 029
+Attribute 030
+Attribute 031
+Attribute 032
+Attribute 033
+Attribute 034
+Attribute 035
+Attribute 036
+Attribute 037
+Attribute 038
+Attribute 039
+Attribute 040
+Attribute 041
+Attribute 042
+Attribute 043
+Attribute 044
+Attribute 045
+Attribute 046
+Attribute 047
+Attribute 048
+Attribute 049
+Attribute 050

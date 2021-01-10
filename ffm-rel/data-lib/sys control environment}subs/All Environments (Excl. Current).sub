@@ -1,0 +1,11 @@
+﻿283,100
+284,"All Environments (Excl. Current)"
+11,20200608040823
+274,
+18,0
+275,109
+{ EXCEPT( {TM1SUBSETALL( [SYS Control Environment] )}, { [SYS Control Environment].[Current Environment] }) }
+278,0
+281,0
+270,1
+Current Environment

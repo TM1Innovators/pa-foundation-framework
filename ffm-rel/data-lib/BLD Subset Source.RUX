@@ -1,0 +1,125 @@
+﻿FORMAT==100
+['Action'] = S: STET;
+
+[] = S:
+	IF(
+		DB('BLD Subset Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,!BLD Subset List
+			,'Action') @= ''
+		,STET
+		,CONTINUE);
+
+['Default', 'Subset Name'] = S: 'Default';
+['Default', 'Display Alias'] = S: 'Display Name';
+['Default', 'Expand Type'] = S: 'Below';
+['Default', 'Subset Type'] = S: 'Static';
+['Default', 'Element Type'] = S: 'A - All Elements';
+['Default', 'Element Name'] = S: '';
+['Default', 'Sort Type'] = S: 'Hierarchize';
+['Default', 'Sort Direction'] = S: 'ASC';
+['Default','Subset Generation Type'] = S: 'Single MDX';
+
+['Leaf', 'Subset Name'] = S:
+	DB('SYS Control'
+		,'Current Environment'
+		,'Default Leaf Subset Name');
+
+['Leaf', 'Display Alias'] = S: 'Display Name';
+['Leaf', 'Expand Type'] = S: 'Below';
+['Leaf', 'Subset Type'] = S: 'Static';
+['Leaf', 'Element Type'] = S: 'L - All Leaf Elements';
+['Leaf', 'Element Name'] = S: '';
+['Leaf', 'Sort Type'] = S: 'Hierarchize';
+['Leaf', 'Sort Direction'] = S: 'ASC';
+['Leaf','Subset Generation Type'] = S: 'Single MDX';
+
+[{'Iterator Dimension 1', 'Iterator Subset 1', 'Iterator Dimension 2', 'Iterator Subset 2', 'Iterator Dimension 3', 'Iterator Subset 3'}] = S:
+	IF(
+		DB('BLD Subset Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,!BLD Subset List
+			,'Subset Generation Type') @<> 'Subset Iterator'
+		,''
+		,CONTINUE);
+
+[] = S:
+	IF(
+		DB('BLD Subset Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,!BLD Subset List
+			,'Action') @= ''
+		,''
+		,CONTINUE);
+
+['Dimension Name'] = S:
+	IF(
+		DB('BLD Dimension Control'
+			,'Current Environment'
+			,'Default'
+			,!BLD Dimension List
+			,'Dimension Name') @<> ''
+		,DB('BLD Dimension Control'
+			,'Current Environment'
+			,'Default'
+			,!BLD Dimension List
+			,'Dimension Name')
+		,!BLD Dimension List);
+
+[{'Element Name', 'Element Name Format String'}] = S:
+	IF(
+		ATTRS(
+			'SYS Subset Type'
+			,DB('BLD Subset Source'
+				,!BLD Dimension List
+				,!BLD Hierarchy List
+				,!BLD Dimension Version
+				,!BLD Subset List
+				,'Element Type')
+			,'Element Required') @<> 'Yes'
+		,''
+		,CONTINUE);
+
+[{'Text Value', 'Text Value Format String'}] = S:
+	IF(
+		ATTRS(
+			'SYS Subset Type'
+			,DB('BLD Subset Source'
+				,!BLD Dimension List
+				,!BLD Hierarchy List
+				,!BLD Dimension Version
+				,!BLD Subset List
+				,'Element Type')
+			,'Text Value Required') @<> 'Yes'
+		,''
+		,CONTINUE);
+
+
+['MDX Query'] = S:
+	IF(
+		ATTRS('SYS Subset Type'
+			,DB('BLD Subset Source'
+				,!BLD Dimension List
+				,!BLD Hierarchy List
+				,!BLD Dimension Version
+				,!BLD Subset List
+				,'Element Type')
+			,'MDX') @= ''
+		,STET
+		,CONTINUE);
+
+['MDX Query'] = S:
+	ATTRS('SYS Subset Type'
+		,DB('BLD Subset Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,!BLD Subset List
+			,'Element Type')
+		,'MDX');

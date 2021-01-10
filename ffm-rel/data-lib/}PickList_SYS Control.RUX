@@ -1,0 +1,9 @@
+﻿FORMAT==100
+['Property Description'] = S: '';
+['Server Details'] = S: 'subset:SYS Control Environment:All Environments (Excl. Current & Description)';
+['Default Build Profile'] = S: 'dimension:BLD Build Profile';
+['Format Preset Dimension'] = S: 'dimension:}Dimensions';
+['Subset Type Dimension'] = S: 'dimension:}Dimensions';
+['Delete Backups After (Days)'] = S: 'static:90:75:60:45:30:14:7:6:5:4:3:2:1::';
+['Translation Currency'] = S: 'dimension:GBL Currency To';
+['Default Build Profile Archiving'] = S: 'static:Yes:No::';

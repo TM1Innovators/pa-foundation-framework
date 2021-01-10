@@ -1,0 +1,4 @@
+﻿FILE_FORMAT=100
+ENTRYNAME=04. Execute Build Profile (Run)
+ENTRYTYPE=process
+ENTRYREFERENCE=TM1:///PROCESS/PUBLIC/BLD.Model.Update.All

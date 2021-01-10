@@ -1,0 +1,11 @@
+﻿283,100
+284,"Leaf Elements"
+11,20210107063454
+274,
+18,0
+275,58
+{TM1FILTERBYLEVEL( {TM1SUBSETALL( [ADM Log Source] )}, 0)}
+278,0
+281,0
+270,1
+Processes

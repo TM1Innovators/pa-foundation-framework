@@ -1,0 +1,173 @@
+﻿FORMAT==100
+['Property Description'] = S: STET;
+
+#Region Date Calculation Rules
+
+['Current Day'] = S:
+	FILL(
+		'0'
+		,2
+		 - LONG(
+			TRIM(STR(
+				DAY(
+					DATE(
+						NOW(), 1))
+				, 2, 0))))
+		| TRIM(STR(
+			DAY(
+				DATE(
+					NOW(), 1))
+			, 2, 0));
+
+['Current Month'] = S:
+	FILL(
+		'0'
+		,2
+		 - LONG(
+			TRIM(STR(
+				MONTH(
+					DATE(
+						NOW(), 1))
+				, 2, 0))))
+		| TRIM(STR(
+			MONTH(
+				DATE(
+					NOW(), 1))
+			, 2, 0));
+
+
+['Current Year'] = S:
+	STR(
+		YEAR(
+			DATE(NOW(), 1)
+		),
+		4,
+		0
+	);
+
+['Current Date'] = S:
+	DB('SYS Control',!SYS Control Environment,'Current Year')
+	  | '-'
+	  | DB('SYS Control',!SYS Control Environment,'Current Month')
+	  | '-'
+	  | DB('SYS Control',!SYS Control Environment,'Current Day');
+
+## Measures with the 'Date Attribute Name' dimension are calculated on the 'Current Date'
+## using the specified attribute on the GBL Date dimension.
+
+[] = S:
+	IF(
+		ATTRS('SYS Control Measure', !SYS Control Measure, 'Date Attribute Name')
+		  @<> ''
+		,ATTRS('GBL Date'
+			,DB('SYS Control',!SYS Control Environment,'Current Date')
+			,ATTRS('SYS Control Measure', !SYS Control Measure, 'Date Attribute Name'))
+		,CONTINUE);
+
+[] = S:
+	IF(
+		ATTRS('SYS Control Measure', !SYS Control Measure, 'Date Element 1') @<> ''
+		,ATTRS('SYS Control Measure', !SYS Control Measure, 'Date Element Prefix')
+		  | DB('SYS Control'
+			,!SYS Control Environment
+			,ATTRS('SYS Control Measure', !SYS Control Measure, 'Date Element 1'))
+		  | IF(
+			ATTRS('SYS Control Measure', !SYS Control Measure, 'Date Element 2') @<> ''
+			,'-'
+			  | DB('SYS Control'
+				,!SYS Control Environment
+				,ATTRS('SYS Control Measure', !SYS Control Measure, 'Date Element 2'))
+			,'')
+		  | ATTRS('SYS Control Measure', !SYS Control Measure, 'Date Element Suffix')
+		,CONTINUE);
+
+
+#Endregion Date Calculation Rules
+
+#Region Generic Environment Rules
+
+['Current Environment', 'Server Details'] = S: STET;
+
+['Current Environment'] = S:
+	IF(
+		ATTRS('SYS Control Measure', !SYS Control Measure, 'Per Environment') @<> 'Yes'
+		,STET
+		,CONTINUE);
+
+[] = S:
+	IF(
+		ATTRS('SYS Control Measure', !SYS Control Measure, 'Per Environment') @<> 'Yes'
+		,''
+		,CONTINUE);
+
+['Current Environment'] = N:
+	IF(
+		ATTRS('SYS Control Measure', !SYS Control Measure, 'Per Environment') @<> 'Yes'
+		,STET
+		,CONTINUE);
+
+[] = N:
+	IF(
+		ATTRS('SYS Control Measure', !SYS Control Measure, 'Per Environment') @<> 'Yes'
+		,0
+		,CONTINUE);
+
+['Current Environment'] = S:
+	IF(
+		ATTRS('SYS Control Measure', !SYS Control Measure, 'Folder Path Element') @= ''
+		,DB('SYS Control'
+			,DB('SYS Control'
+				,!SYS Control Environment
+				,'Server Details')
+			,!SYS Control Measure)
+		,CONTINUE);
+
+['Current Environment'] = N:
+	IF(
+		ATTRS('SYS Control Measure', !SYS Control Measure, 'Folder Path Element') @= ''
+		,DB('SYS Control'
+			,DB('SYS Control'
+				,!SYS Control Environment
+				,'Server Details')
+			,!SYS Control Measure)
+		,CONTINUE);
+
+[]  = S:
+	IF(
+		ATTRS('SYS Control Measure',!SYS Control Measure,'Folder Path Element') @<> ''
+		,DB('SYS Control'
+			,!SYS Control Environment
+			,ATTRS('SYS Control Measure'
+				,!SYS Control Measure
+				,'Folder Path Element'))
+		  | IF(
+			SUBST(
+				DB('SYS Control'
+					,!SYS Control Environment
+					,ATTRS('SYS Control Measure'
+						,!SYS Control Measure
+						,'Folder Path Element'
+					)
+				)
+				,LONG(
+					DB('SYS Control'
+						,!SYS Control Environment
+						,ATTRS('SYS Control Measure'
+							,!SYS Control Measure
+							,'Folder Path Element'
+						)
+					)
+				),
+				1
+			) @= '\'
+			,''
+			,'\'
+		) |
+		DB('SYS Control'
+			,!SYS Control Environment
+			,ATTRS('SYS Control Measure'
+				,!SYS Control Measure
+				,'Folder Name Element'
+			)
+		),
+	STET);

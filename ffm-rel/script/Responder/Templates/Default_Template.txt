@@ -1,0 +1,5 @@
+A notification occurred on {%EventDate%} at {%EventTime%} for event "{%EventID%}", to which you are subscribed. 
+<br><br>
+{%Message%}
+<br><br>
+<a href="{%Link%}">More information</a><br><br>

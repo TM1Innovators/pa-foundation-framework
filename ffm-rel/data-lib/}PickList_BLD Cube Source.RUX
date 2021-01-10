@@ -1,0 +1,10 @@
+﻿FORMAT==100
+['Dimension Name', 'Value'] = S:
+	IF(
+		DB('BLD Cube Source'
+			,!BLD Cube List
+			,!BLD Cube Version
+			,!BLD Cube Dimension List
+			,'Dimension Select Type') @<> 'Manual'
+		,'dimension:}dimensions'
+		,'');

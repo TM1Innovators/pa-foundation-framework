@@ -1,0 +1,4 @@
+﻿FILE_FORMAT=100
+ENTRYNAME=01. Check Message Log (Dbl-Click)
+ENTRYTYPE=cube
+ENTRYREFERENCE=TM1:///CUBE/PUBLIC/ADM Log Message

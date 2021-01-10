@@ -1,0 +1,117 @@
+﻿FORMAT==100
+['All Cube Dimension List', 'Action'] = S: STET;
+
+[] = S:
+	IF(
+		DB('BLD Cube Source',!BLD Cube List,!BLD Cube Version,'All Cube Dimension List','Action')
+		  @= ''
+		,STET
+		,CONTINUE);
+
+[{'Rule File Path', 'Rule File Name'}, 'All Cube Dimension List'] = S:
+	IF(
+		DB('BLD Cube Source'
+			,!BLD Cube List
+			,!BLD Cube Version
+			,!BLD Cube Dimension List
+			,'Rule File Type') @= 'Manual'
+		,STET
+		,CONTINUE);
+
+['Rule File Path', 'All Cube Dimension List'] = S:
+	IF(
+		DB('BLD Cube Source'
+			,!BLD Cube List
+			,!BLD Cube Version
+			,!BLD Cube Dimension List
+			,'Rule File Type') @= 'Default'
+		,DB('SYS Control','Current Environment','Default Rule Path')
+		,CONTINUE);
+
+['Rule File Name', 'All Cube Dimension List'] = S:
+	IF(
+		DB('BLD Cube Source'
+			,!BLD Cube List
+			,!BLD Cube Version
+			,!BLD Cube Dimension List
+			,'Rule File Type') @= 'Default'
+		,DB('SYS Control','Current Environment','Default Rule File Format String')
+		,CONTINUE);
+
+[{'Rule File Path', 'Rule File Name'}] = S:
+	'';
+
+[{'Picklist File Path', 'Picklist File Name'}, 'All Cube Dimension List'] = S:
+	IF(
+		DB('BLD Cube Source'
+			,!BLD Cube List
+			,!BLD Cube Version
+			,!BLD Cube Dimension List
+			,'Picklist File Type') @= 'Manual'
+		,STET
+		,CONTINUE);
+
+['Picklist File Path', 'All Cube Dimension List'] = S:
+	IF(
+		DB('BLD Cube Source'
+			,!BLD Cube List
+			,!BLD Cube Version
+			,!BLD Cube Dimension List
+			,'Picklist File Type') @= 'Default'
+		,DB('SYS Control','Current Environment','Default Picklist Path')
+		,CONTINUE);
+
+['Picklist File Name', 'All Cube Dimension List'] = S:
+	IF(
+		DB('BLD Cube Source'
+			,!BLD Cube List
+			,!BLD Cube Version
+			,!BLD Cube Dimension List
+			,'Picklist File Type') @= 'Default'
+		,DB('SYS Control','Current Environment','Default Picklist File Format String')
+		,CONTINUE);
+
+[{'Picklist File Path', 'Picklist File Name'}] = S:
+	'';
+
+['Dimension Name'] = S:
+	IF(
+		DB('BLD Cube Source'
+			,!BLD Cube List
+			,!BLD Cube Version
+			,!BLD Cube Dimension List
+			,'Dimension Select Type') @= ''
+		,''
+		,CONTINUE);
+
+['All Cube Dimension List'] = S:
+	IF(
+		ATTRS('BLD Cube Source Measure'
+			,!BLD Cube Source Measure
+			,'Input At All Cube Dimension List') @= 'Yes'
+		,STET
+		,CONTINUE);
+
+['All Cube Dimension List'] = S:
+	IF(
+		ATTRS('BLD Cube Source Measure'
+			,!BLD Cube Source Measure
+			,'Input At All Cube Dimension List') @= 'No'
+		,''
+		,CONTINUE);
+
+[] = S:
+	IF(
+		ATTRS('BLD Cube Source Measure'
+			,!BLD Cube Source Measure
+			,'Input Per Cube Dimension List') @= 'Yes'
+		,STET
+		,CONTINUE);
+
+[] = S:
+	IF(
+		ATTRS('BLD Cube Source Measure'
+			,!BLD Cube Source Measure
+			,'Input Per Cube Dimension List') @= 'No'
+		,''
+		,CONTINUE);

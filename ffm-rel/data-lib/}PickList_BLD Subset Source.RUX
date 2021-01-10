@@ -1,0 +1,118 @@
+﻿FORMAT==100
+['Element Name', 'Value'] = S:
+	IF(
+		DB('BLD Subset Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,!BLD Subset List
+			,'Action') @= ''
+		  % DB('BLD Subset Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,!BLD Subset List
+			,'Subset Generation Type') @= 'Subset Iterator'
+		,STET
+		,CONTINUE);
+
+['Element Name', 'Value'] = S:
+	IF(
+		SCAN(
+			'%sDimensionName%'
+			,ATTRS(
+				'SYS Subset Type'
+				,DB('BLD Subset Source'
+					,!BLD Dimension List
+					,!BLD Hierarchy List
+					,!BLD Dimension Version
+					,!BLD Subset List
+					,'Element Type')
+				,'Element Picklist String')) = 0
+		,ATTRS(
+			'SYS Subset Type'
+			,DB('BLD Subset Source'
+				,!BLD Dimension List
+				,!BLD Hierarchy List
+				,!BLD Dimension Version
+				,!BLD Subset List
+				,'Element Type')
+			,'Element Picklist String')
+		,CONTINUE);
+
+['Element Name', 'Value'] = S:
+	SUBST(
+		ATTRS(
+			'SYS Subset Type'
+			,DB('BLD Subset Source'
+				,!BLD Dimension List
+				,!BLD Hierarchy List
+				,!BLD Dimension Version
+				,!BLD Subset List
+				,'Element Type')
+			,'Element Picklist String')
+		,1
+		,SCAN(
+			'%sDimensionName%'
+			,ATTRS(
+				'SYS Subset Type'
+				,DB('BLD Subset Source'
+					,!BLD Dimension List
+					,!BLD Hierarchy List
+					,!BLD Dimension Version
+					,!BLD Subset List
+					,'Element Type')
+				,'Element Picklist String')) - 1)
+	| DB('BLD Subset Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,!BLD Subset List
+			,'Dimension Name')
+	| SUBST(
+		ATTRS(
+			'SYS Subset Type'
+			,DB('BLD Subset Source'
+				,!BLD Dimension List
+				,!BLD Hierarchy List
+				,!BLD Dimension Version
+				,!BLD Subset List
+				,'Element Type')
+			,'Element Picklist String')
+		,SCAN(
+			'%sDimensionName%'
+			,ATTRS(
+				'SYS Subset Type'
+				,DB('BLD Subset Source'
+					,!BLD Dimension List
+					,!BLD Hierarchy List
+					,!BLD Dimension Version
+					,!BLD Subset List
+					,'Element Type')
+				,'Element Picklist String'))
+		  + LONG('%sDimensionName%')
+		,999999);
+
+['Text Value', 'Value'] = S:
+	IF(
+		SCAN(
+			'%sDimensionName%'
+			,ATTRS(
+				'SYS Subset Type'
+				,DB('BLD Subset Source'
+					,!BLD Dimension List
+					,!BLD Hierarchy List
+					,!BLD Dimension Version
+					,!BLD Subset List
+					,'Element Type')
+				,'Text Value Picklist String')) = 0
+		,ATTRS(
+			'SYS Subset Type'
+			,DB('BLD Subset Source'
+				,!BLD Dimension List
+				,!BLD Hierarchy List
+				,!BLD Dimension Version
+				,!BLD Subset List
+				,'Element Type')
+			,'Text Value Picklist String')
+		,CONTINUE);

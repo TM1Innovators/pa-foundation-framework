@@ -1,0 +1,10 @@
+﻿283,100
+284,"}Drill_Dimension Control to Hierarchy Item - Admin"
+11,20201213024507
+274,
+18,0
+275,71
+{ TM1SubsetToSet( [BLD Hierarchy List], 'All Hierarchies', 'public' ) }
+278,0
+281,0
+270,0

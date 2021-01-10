@@ -1,0 +1,17 @@
+﻿FORMAT==100
+[{'Cube Version', 'View Version'}] = S:
+	DB('BLD Cube Control'
+		,!BLD Build Profile
+		,!BLD Cube List
+		,'Build Version');
+
+['Notes', 'Default'] = S:
+	STET;
+
+['Notes'] = S:
+	DB('BLD Cube Control'
+		,'Default'
+		,!BLD Cube List
+		,!BLD Cube Control Measure);
+
+

@@ -1,0 +1,4 @@
+﻿FILE_FORMAT=100
+ENTRYNAME=08. Add or Remove Dimensions (Edit)
+ENTRYTYPE=dimension
+ENTRYREFERENCE=TM1:///DIMENSION/PUBLIC/BLD Dimension List

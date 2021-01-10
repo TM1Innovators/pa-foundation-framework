@@ -1,0 +1,31 @@
+[] = S:
+	IF(
+		!SYS Control Environment
+		  @<> DB('SYS Control','Current Environment','Server Details')
+		,STET
+		,CONTINUE);
+
+['Version Type'] = S:
+	ATTRS('GBL Version'
+		,!GBL Version
+		,'Version Type');
+
+[{'Published Version', 'Working Version', 'Last Published Period'}] = S:
+	IF(
+		DB('SYS Rolling Version Control'
+			,!SYS Control Environment
+			,!GBL Version
+			,'Version Type')
+		  @<> 'Rolling'
+		,''
+		,STET);
+
+[{ 'Forecast Start Period', 'Forecast Length (Periods)' }] = S:
+	IF(
+		DB('SYS Rolling Version Control'
+			,!SYS Control Environment
+			,!GBL Version
+			,'Version Type')
+		  @<> 'Working'
+		,''
+		,STET);

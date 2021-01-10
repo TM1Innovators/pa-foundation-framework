@@ -1,0 +1,12 @@
+﻿FORMAT==100
+#
+#
+
+['CubeDrillString'] = S:
+	IF(
+		DB('BLD Dimension Source',!BLD Dimension List,!BLD Hierarchy List,!BLD Dimension Version,'All Hierarchy Level','Build Process Name') @= ''
+		  % DB('BLD Dimension Source',!BLD Dimension List,!BLD Hierarchy List,!BLD Dimension Version,'All Hierarchy Level','Build Process Parameter Set') @= ''
+		,''
+		,'Dimension Source to Parameter Set,'
+	)
+	  | 'Dimension Source to Attribute Source,Dimension Source to Element Source,Dimension Source to Subset Source';

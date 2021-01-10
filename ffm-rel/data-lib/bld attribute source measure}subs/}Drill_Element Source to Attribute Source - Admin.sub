@@ -1,0 +1,10 @@
+﻿283,100
+284,"}Drill_Element Source to Attribute Source - Admin"
+11,20201109065921
+274,
+18,0
+275,73
+{ TM1SubsetToSet( [BLD Attribute Source Measure], 'Default', 'public' ) }
+278,0
+281,0
+270,0
