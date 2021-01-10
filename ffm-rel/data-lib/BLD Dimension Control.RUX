@@ -1,0 +1,16 @@
+﻿FORMAT==100
+[{'Hierarchy Version', 'Element Version', 'Subset Version'}] = S:
+	DB('BLD Dimension Control'
+		,!BLD Build Profile
+		,!BLD Dimension List
+		,'Build Version');
+
+['Notes', 'Default'] = S:
+	STET;
+
+['Notes'] = S:
+	DB('BLD Dimension Control'
+		,'Default'
+		,!BLD Dimension List
+		,!BLD Dimension Control Measure);
+

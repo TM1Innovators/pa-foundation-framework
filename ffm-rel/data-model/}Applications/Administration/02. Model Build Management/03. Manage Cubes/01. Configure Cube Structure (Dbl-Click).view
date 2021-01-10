@@ -1,0 +1,4 @@
+﻿FILE_FORMAT=100
+ENTRYNAME=01. Configure Cube Structure (Dbl-Click)
+ENTRYTYPE=view
+ENTRYREFERENCE=TM1:///VIEW/PUBLIC/BLD Cube Source/Input Cube Structure

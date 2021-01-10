@@ -1,0 +1,21 @@
+﻿283,100
+284,"Input Per Hierarchy Level"
+11,20201110025437
+274,
+18,0
+275,127
+{FILTER( {TM1SUBSETALL( [BLD Dimension Source Measure] )}, [BLD Dimension Source Measure].[Input Per Hierarchy Level] = "Yes")}
+278,0
+281,0
+270,11
+Action
+Dimension Name
+Generate Display Name
+Default Weighting
+Default Element Type
+Hierarchy Name
+Total Element Name
+Total Element Display Name
+Display Name Attribute
+Build Process Name
+Comments

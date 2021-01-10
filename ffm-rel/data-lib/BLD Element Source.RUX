@@ -1,0 +1,170 @@
+﻿FORMAT==100
+['Header'] = N: 0;
+
+['Header'] = S:
+	IF(
+		ATTRS('BLD Element Source Measure'
+			,!BLD Element Source Measure
+			,'Attribute_Item_Mapping') @<> ''
+		  & DB('BLD Attribute Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,ATTRS('BLD Element Source Measure'
+				,!BLD Element Source Measure
+				,'Attribute_Item_Mapping')
+			,'Attribute Name')
+		    @<> ''
+		  & DB('BLD Attribute Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,ATTRS('BLD Element Source Measure'
+				,!BLD Element Source Measure
+				,'Attribute_Item_Mapping')
+			,'Attribute Type')
+		    @<> ''
+		,DB('BLD Attribute Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,ATTRS('BLD Element Source Measure'
+				,!BLD Element Source Measure
+				,'Attribute_Item_Mapping')
+			,'Attribute Name')
+		  | ' ('
+		  | DB('BLD Attribute Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,ATTRS('BLD Element Source Measure'
+				,!BLD Element Source Measure
+				,'Attribute_Item_Mapping')
+			,'Attribute Type')
+		  | ')'
+		,!BLD Element Source Measure);
+
+['Action'] = S: STET;
+
+[] = S:
+	IF(
+		DB('BLD Element Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,!BLD Element List
+			,'Action') @= ''
+		,STET
+		,CONTINUE);
+
+['Display Name'] = S:
+	IF(
+		DB('BLD Dimension Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,'All Hierarchy Level'
+			,'Generate Display Name') @<> 'Yes'
+		,STET
+		,CONTINUE);
+
+['Display Name'] = S:
+	IF(
+		DB('BLD Element Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,!BLD Element List
+			,'Description') @<> ''
+		,DB('BLD Element Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,!BLD Element List
+			,'Element Name')
+		  | ' - '
+		  | DB('BLD Element Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,!BLD Element List
+			,'Description')
+		,''
+	);
+
+['Format String'] = S:
+	IF(
+		DB('BLD Element Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,!BLD Element List
+			,'Element Type') @= 'String'
+		,''
+		,CONTINUE);
+
+['Format Preset'] = S:
+	IF(
+		DIMIX('}Dimensions'
+			,DB('SYS Control'
+				,'Current Environment'
+				,'Format Preset Dimension')) = 0
+		,''
+		,CONTINUE);
+
+['Format String'] = S:
+	IF(
+		ATTRS(
+			DB('SYS Control'
+				,'Current Environment'
+				,'Format Preset Dimension')
+			,DB('BLD Element Source'
+				,!BLD Dimension List
+				,!BLD Hierarchy List
+				,!BLD Dimension Version
+				,!BLD Element List
+				,'Format Preset')
+			,'Format String') @<> ''
+		,ATTRS(
+			DB('SYS Control'
+				,'Current Environment'
+				,'Format Preset Dimension')
+			,DB('BLD Element Source'
+				,!BLD Dimension List
+				,!BLD Hierarchy List
+				,!BLD Dimension Version
+				,!BLD Element List
+				,'Format Preset')
+			,'Format String')
+		,STET);
+
+[] = S:
+	IF(
+		ATTRS('BLD Element Source Measure'
+			,!BLD Element Source Measure
+			,'Dimension_Source_Default_Measure') @<> ''
+		  & DB('BLD Dimension Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,'All Hierarchy Level'
+			,ATTRS('BLD Element Source Measure'
+				,!BLD Element Source Measure
+				,'Dimension_Source_Default_Measure')) @= ''
+		,STET
+		,CONTINUE);
+
+[] = S:
+	IF(
+		ATTRS('BLD Element Source Measure'
+			,!BLD Element Source Measure
+			,'Dimension_Source_Default_Measure') @<> ''
+		,DB('BLD Dimension Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,'All Hierarchy Level'
+			,ATTRS('BLD Element Source Measure'
+				,!BLD Element Source Measure
+				,'Dimension_Source_Default_Measure'))
+		,CONTINUE);

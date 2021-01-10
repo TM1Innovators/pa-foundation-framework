@@ -1,0 +1,11 @@
+﻿283,100
+284,"Current Day"
+11,20210107063454
+274,Display Name
+18,0
+275,171
+{ TM1SORTBYINDEX( { StrToMember( '[GBL Date].[' + [SYS Control].( [SYS Control Environment].[Current Environment], [SYS Control Measure].[Current Date] ) + ']') }, ASC ) }
+278,0
+281,0
+270,1
+2020-04-04

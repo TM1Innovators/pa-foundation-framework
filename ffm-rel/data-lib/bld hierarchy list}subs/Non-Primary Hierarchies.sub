@@ -1,0 +1,12 @@
+﻿283,100
+284,"Non-Primary Hierarchies"
+11,20200412064651
+274,
+18,0
+275,82
+{EXCEPT({TM1SUBSETALL( [BLD Hierarchy List] )}, {[BLD Hierarchy List].[Primary]})}
+278,0
+281,0
+270,2
+Primary
+Hierarchy 001

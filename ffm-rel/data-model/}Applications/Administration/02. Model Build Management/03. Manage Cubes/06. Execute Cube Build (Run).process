@@ -1,0 +1,4 @@
+﻿FILE_FORMAT=100
+ENTRYNAME=06. Execute Cube Build (Run)
+ENTRYTYPE=process
+ENTRYREFERENCE=TM1:///PROCESS/PUBLIC/BLD.Model.Update.All.Cubes

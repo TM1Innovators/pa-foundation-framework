@@ -1,0 +1,36 @@
+['Current Version'] = S:
+	IF(
+		ELLEV('GBL Period', !GBL Period) > 0
+		,''
+		,CONTINUE);
+
+['Current Version'] = S:
+	IF(
+		ATTRS('GBL Version', !GBL Version, 'Version Type')
+		  @<> 'Rolling'
+		,''
+		,CONTINUE);
+
+['Current Version'] = S:
+	IF(
+		NUMBR(
+			ATTRS(
+				'GBL Period'
+				,DB('SYS Rolling Version Control'
+					,!SYS Control Environment
+					,!GBL Version
+					,'Last Published Period')
+				,'EOM Excel Date Serial'))
+		  >= NUMBR(
+			ATTRS(
+				'GBL Period'
+				,!GBL Period
+				,'EOM Excel Date Serial'))
+		,DB('SYS Rolling Version Control'
+			,!SYS Control Environment
+			,!GBL Version
+			,'Published Version')
+		,DB('SYS Rolling Version Control'
+			,!SYS Control Environment
+			,!GBL Version
+			,'Working Version'));

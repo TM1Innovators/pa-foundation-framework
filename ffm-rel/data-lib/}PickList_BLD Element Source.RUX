@@ -1,0 +1,12 @@
+﻿FORMAT==100
+['Value'] = S:
+	IF(ATTRS('BLD Element Source Measure'
+		,!BLD Element Source Measure
+		,'Attribute_Item_Mapping') @<> ''
+	,DB('BLD Attribute Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,ATTRS('BLD Element Source Measure', !BLD Element Source Measure, 'Attribute_Item_Mapping')
+			,'Picklist String')
+	,CONTINUE);

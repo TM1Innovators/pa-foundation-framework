@@ -1,0 +1,32 @@
+﻿283,100
+284,"Default"
+11,20201117030626
+274,
+18,0
+275,56
+{TM1FILTERBYLEVEL( {TM1SUBSETALL( [ADM Log Line] )}, 0)}
+278,0
+281,0
+270,22
+Summary
+Line 1
+Line 2
+Line 3
+Line 4
+Line 5
+Line 6
+Line 7
+Line 8
+Line 9
+Line 10
+Line 11
+Line 12
+Line 13
+Line 14
+Line 15
+Line 16
+Line 17
+Line 18
+Line 19
+Line 20
+Total Line

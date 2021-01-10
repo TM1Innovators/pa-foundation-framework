@@ -1,0 +1,12 @@
+﻿FORMAT==100
+['CubeDrillString'] = S:
+	'Dimension Control to Dimension Item'
+	| ',Dimension Control to Hierarchy Item'
+	| ',Dimension Control to Hierarchy Levels'
+	| ',Dimension Control to Attribute Source'
+	| ',Dimension Control to Element Source'
+	| ',Dimension Control to Subset Source'
+	| ',Dimension Control to Build Dimension'
+	| ',Dimension Control to Log Message'
+;
+

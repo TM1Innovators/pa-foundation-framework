@@ -1,0 +1,15 @@
+﻿283,100
+284,"Default"
+11,20201213012529
+274,
+18,0
+275,123
+{FILTER( {TM1SUBSETALL( [BLD Dimension Source Measure] )}, [BLD Dimension Source Measure].[Display for Dimension] = "Yes")}
+278,0
+281,0
+270,5
+Action
+Dimension Name
+Generate Display Name
+Default Weighting
+Default Element Type

@@ -1,0 +1,11 @@
+﻿283,100
+284,"Next Available"
+11,20200609055336
+274,
+18,0
+275,238
+{ FILTER ( {TM1SUBSETALL( [ADM Log Entry] )}, [ ADM Log ].( [ADM Log Source].[TST.ADM.Create_Log_Entry], [GBL Date].[26/03/2020], [ADM Log Entry].CurrentMember, [ADM Log Line].[Line 1], [ADM Log Measure].[Message Type] ) = "" ).Item(0) }
+278,0
+281,0
+270,1
+Entry 1

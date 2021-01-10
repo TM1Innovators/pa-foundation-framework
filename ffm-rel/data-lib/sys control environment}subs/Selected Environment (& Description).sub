@@ -1,0 +1,11 @@
+﻿283,100
+284,"Selected Environment (& Description)"
+11,20200608041226
+274,
+18,0
+275,224
+{ UNION({ [SYS Control Environment].[Property Description] }, { StrToMember( '[SYS Control Environment].[' + [SYS Control].([SYS Control Environment].[Current Environment], [SYS Control Measure].[Server Details]) + ']' )} )}
+278,0
+281,0
+270,1
+Current Environment

@@ -1,0 +1,9 @@
+﻿FORMAT==100
+['Subset Name', 'Value'] = S:
+	'dimension:}Subsets_'
+	  | DB('BLD View Source'
+		,!BLD Cube List
+		,!BLD Cube Version
+		,!BLD View List
+		,!BLD Cube Dimension List
+		,'Dimension Name');

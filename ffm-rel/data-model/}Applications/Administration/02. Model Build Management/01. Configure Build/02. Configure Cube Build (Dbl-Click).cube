@@ -1,0 +1,4 @@
+﻿FILE_FORMAT=100
+ENTRYNAME=02. Configure Cube Build (Dbl-Click)
+ENTRYTYPE=cube
+ENTRYREFERENCE=TM1:///CUBE/PUBLIC/BLD Cube Control

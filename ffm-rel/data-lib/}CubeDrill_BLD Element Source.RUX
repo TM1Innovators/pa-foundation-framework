@@ -1,0 +1,8 @@
+﻿FORMAT==100
+['CubeDrillString'] = S: 'Element Source to Attribute Source'
+	| ',Element Source to Dimension Item'
+	| ',Dimension Control to Hierarchy Item'
+	| ',Dimension Control to Hierarchy Levels'
+	| ',Element Source to Subset Source'
+;
+

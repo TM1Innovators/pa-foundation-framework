@@ -1,0 +1,70 @@
+﻿283,100
+284,"Default"
+11,20201206133615
+274,Display Name
+18,0
+275,
+278,0
+281,0
+270,61
+Server Details
+Model Name
+Server Path
+DataFiles Folder
+Config Folder
+LogFiles Folder
+Worksheets Folder
+Source Data Folder
+Temp Data Folder
+Scripts Folder
+Backup Folder
+Default Build Profile
+Default Build Profile Archiving
+Default Archive Element Format String
+Default Archive Parent Format String
+Format Preset Dimension
+Subset Type Dimension
+Default Leaf Subset Name
+Default Display Alias Name
+Default Rule Folder
+Default Rule File Format String
+Default Picklist Folder
+Default Picklist File Format String
+Default Import Folder
+Default Export Folder
+Default Export File Format String
+Default Control File Format String
+Delete Backups After (Days)
+Translation Currency
+Current Day
+Current Month
+Current Year
+Current Date
+Current CAL Year
+Current CAL Half
+Current CAL Quarter
+Current CAL Month
+Current CAL Month Name Short
+Current CAL Month Name Long
+Current CAL Day
+Current CAL Day Of Year
+Current CAL Day Name Short
+Current CAL Day Name Long
+Current FIN Year
+Current FIN Half
+Current FIN Quarter
+Current FIN Month
+Current FIN Day
+Current FIN Day Of Year
+Current FIN Period Month
+Current FIN Period Quarter (FHQ)
+Current FIN Period Half (FHQ)
+Current FIN Period Year (FHQ)
+Current FIN Period Year (FYM)
+Responder Application Folder
+Responder Queue Folder
+Build Parameters
+System Parameters
+Planning Parameters
+Date Controls
+Notification Parameters

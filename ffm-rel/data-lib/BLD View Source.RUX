@@ -1,0 +1,138 @@
+﻿FORMAT==100
+['Action', 'All Cube Dimension List'] = S: STET;
+
+[] = S:
+	IF(
+		DB('BLD View Source'
+			,!BLD Cube List
+			,!BLD Cube Version
+			,!BLD View List
+			,'All Cube Dimension List'
+			,'Action') @= ''
+		,STET
+		,CONTINUE);
+
+['View Count'] = N:
+	IF(
+		DB('BLD View Source'
+			,!BLD Cube List
+			,!BLD Cube Version
+			,!BLD View List
+			,!BLD Cube Dimension List
+			,'View Name') @<> ''
+		,1
+		,0);
+
+['Dimension Count'] = N:
+	IF(
+		DB('BLD View Source'
+			,!BLD Cube List
+			,!BLD Cube Version
+			,!BLD View List
+			,!BLD Cube Dimension List
+			,'Dimension Name') @<> ''
+		,1
+		,0);
+
+['Total Cube Dimension List'] = S:
+	DB('BLD View Source'
+		,!BLD Cube List
+		,!BLD Cube Version
+		,!BLD View List
+		,'All Cube Dimension List'
+		,!BLD View Source Measure);
+
+[{'Display Alias'
+	,'Expand Type'
+	,'Subset Type'
+	,'Element Type'
+	,'Element Name'
+	,'Sort Type'
+	,'Sort Direction'}] = S:
+	IF(
+		DB('BLD View Source'
+			,!BLD Cube List
+			,!BLD Cube Version
+			,!BLD View List
+			,!BLD Cube Dimension List
+			,'Subset Name') @<> ''
+		,''
+		,CONTINUE);
+
+['Cube Name', 'All Cube Dimension List'] = S:
+	IF(
+			DB('BLD Cube Source'
+				,!BLD Cube List
+				,!BLD Cube Version
+				,!BLD Cube Dimension List
+				,'Target Cube Name') @<> ''
+			,DB('BLD Cube Source'
+				,!BLD Cube List
+				,!BLD Cube Version
+				,!BLD Cube Dimension List
+				,'Target Cube Name')
+			,!BLD Cube List);
+
+['Dimension Name'] = S:
+	DB('BLD Cube Source'
+		,!BLD Cube List
+		,!BLD Cube Version
+		,!BLD Cube Dimension List
+		,'Dimension Name');
+
+['Element Name'] = S:
+	IF(
+		ATTRS(
+			'SYS Subset Type'
+			,DB('BLD View Source'
+				,!BLD Cube List
+				,!BLD Cube Version
+				,!BLD View List
+				,!BLD Cube Dimension List
+				,'Element Type')
+			,'Element Required') @<> 'Yes'
+		,''
+		,CONTINUE);
+
+['MDX Query'] = S:
+	ATTRS('SYS Subset Type'
+		,DB('BLD View Source'
+			,!BLD Cube List
+			,!BLD Cube Version
+			,!BLD View List
+			,!BLD Cube Dimension List
+			,'Element Type')
+		,'MDX');
+
+
+['All Cube Dimension List'] = S:
+	IF(
+		ATTRS('BLD VIew Source Measure'
+			,!BLD View Source Measure
+			,'Input At All Cube Dimension List') @= 'Yes'
+		,STET
+		,CONTINUE);
+
+['All Cube Dimension List'] = S:
+	IF(
+		ATTRS('BLD View Source Measure'
+			,!BLD View Source Measure
+			,'Input At All Cube Dimension List') @= 'No'
+		,''
+		,CONTINUE);
+
+[] = S:
+	IF(
+		ATTRS('BLD View Source Measure'
+			,!BLD View Source Measure
+			,'Input Per Cube Dimension List') @= 'Yes'
+		,STET
+		,CONTINUE);
+
+[] = S:
+	IF(
+		ATTRS('BLD View Source Measure'
+			,!BLD View Source Measure
+			,'Input Per Cube Dimension List') @= 'No'
+		,''
+		,CONTINUE);

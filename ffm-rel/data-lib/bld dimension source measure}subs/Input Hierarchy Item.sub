@@ -1,0 +1,17 @@
+﻿283,100
+284,"Input Hierarchy Item"
+11,20201213024508
+274,
+18,0
+275,123
+{FILTER( {TM1SUBSETALL( [BLD Dimension Source Measure] )}, [BLD Dimension Source Measure].[Display for Hierarchy] = "Yes")}
+278,0
+281,0
+270,7
+Action
+Hierarchy Name
+Total Element Name
+Total Element Display Name
+Display Name Attribute
+Build Process Name
+Comments

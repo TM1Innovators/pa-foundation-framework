@@ -1,0 +1,6 @@
+<Notification>
+  <property name="NotificationHandlerList" value="TemplatedEmailNotifier" />
+  <property name="EventID" value="Default Message" />
+  <property name="Message" value="Hello, this is the default message template. There really ain't much to it, but it does the job!" />
+  <property name="Link" value="http://google.com" />
+</Notification>
