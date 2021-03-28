@@ -4,7 +4,7 @@
 586,"\\kracken\TM1 Servers (Kracken)\ffm-dev\export\}20201209194658_526069284_tmp\Dimension_Control_}20201209194658_578819647_tmp.csv"
 585,"\\kracken\TM1 Servers (Kracken)\ffm-dev\export\}20201209194658_526069284_tmp\Dimension_Control_}20201209194658_578819647_tmp.csv"
 564,
-565,"cxoa6CRYd4ck8l;jYK\vLrWRqIE3pOwNs5O<9dVCpxQ[eyrDr@2:JWTIJUBH;0dbO;5xMuIFX3BLGx:dJ;`i36pi@OLoTiy>e0uIZ?vdulB_6X=PN=c:cmgqVe[b1`6Bg2[tVOt^QAz`GruD<PzaxK2^IkZUX_=zCy[M9trNjNIPyM0bIY2^e_qzN5;>HlAv58ZUq:D0"
+565,"gAeM6leaRPv]C4IUMWP7kYj3c4W\`__^`AnS^ah2nb9ws2ynraJ0BUiH3quK21f[Pz9:tidB7mzAa`j5>>GH5RjeZqEtzm>FQ]@ra0IFQ2;Asxo@GwKvMHjQU\mQ:uo3md5QZ[OI@]P8c\1\k4_@?LSpu?7e`mb7QeIUpBWKAC<O32FK==@wH^7:9EC?JaU]Dti4;3sS"
 559,1
 928,0
 593,
@@ -244,7 +244,7 @@ sBuild_Version = IF( pTargetBuildVersion @= '', vBuild_Version, pTargetBuildVers
 
 sHierarchy_Import_File_Name = vHierarchy_Source_File_Name;
 
-IF( FileExists( sImport_File_Path | '\' | sHierarchy_Import_File_Name ) = 1 );
+IF( sHierarchy_Import_File_Name @<> '' & FileExists( sImport_File_Path | '\' | sHierarchy_Import_File_Name ) = 1 );
 
 	sSubsetTypeList = 'E,A,E,A,A';
 	sSubsetElementList = sDimension_List | ',,' | sBuild_Version | ',,';
@@ -261,7 +261,7 @@ ENDIF;
 
 sAttribute_Import_File_Name = vAttribute_Source_File_Name;
 
-IF( FileExists( sImport_File_Path | '\' | sAttribute_Import_File_Name ) = 1 );
+IF( sAttribute_Import_File_Name @<> '' & FileExists( sImport_File_Path | '\' | sAttribute_Import_File_Name ) = 1 );
 
 	sSubsetTypeList = 'E,A,E,A,A';
 	sSubsetElementList = sDimension_List | ',,' | sBuild_Version | ',,';
@@ -278,7 +278,7 @@ ENDIF;
 
 sElement_Import_File_Name = vElement_Source_File_Name;
 
-IF( FileExists( sImport_File_Path | '\' | sElement_Import_File_Name ) = 1 );
+IF( sElement_Import_File_Name @<> '' & FileExists( sImport_File_Path | '\' | sElement_Import_File_Name ) = 1 );
 
 	sSubsetTypeList = 'E,A,E,A,A';
 	sSubsetElementList = sDimension_List | ',,' | sBuild_Version | ',,';
@@ -295,7 +295,7 @@ ENDIF;
 
 sSubset_Import_File_Name = vSubset_Source_File_Name;
 
-IF( FileExists( sImport_File_Path | '\' | sSubset_Import_File_Name ) = 1 );
+IF( sSubset_Import_File_Name @<> '' & FileExists( sImport_File_Path | '\' | sSubset_Import_File_Name ) = 1 );
 
 	sSubsetTypeList = 'E,,E,A,A';
 	sSubsetElementList = sDimension_List | ',,' | sBuild_Version | ',,';
@@ -312,7 +312,7 @@ ENDIF;
 
 sProcess_Parameter_Import_File_Name = vProcess_Parameter_Source_File_Name;
 
-IF( FileExists( sImport_File_Path | '\' | sProcess_Parameter_Import_File_Name ) = 1 );
+IF( sProcess_Parameter_Import_File_Name @<> '' & FileExists( sImport_File_Path | '\' | sProcess_Parameter_Import_File_Name ) = 1 );
 
 	sSubsetTypeList = 'E,A,A,A';
 	sSubsetElementList = 'BLD.Model.Update.Hierarchy.Date.Balance,,,';

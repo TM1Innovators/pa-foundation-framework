@@ -24,8 +24,8 @@
 7,BLD Hierarchy Level
 6,Drill_Dimension_Control_to_Hierarchy_Levels_-_Admin
 373,2
-1,v1.0
-1,GBL Date
+2,v1.1
+1,GBL Period
 372,0
 372,00
 384,0
@@ -43,5 +43,5 @@
 0
 0
 0
-11,20210110110609
+11,20210123051508
 381,0

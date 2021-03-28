@@ -1,0 +1,15 @@
+SKIPCHECK;
+
+['Non-Working Days'] = C:
+	IF(
+		ELLEV( 'GBL Date', !GBL Date ) = 0
+		  & ELLEV( 'SYS Calendar Location', !SYS Calendar Location ) = 0
+		,MIN(1, ['Weekend'] + ['Holiday'] )
+		,CONTINUE);
+
+## Ensure that non working days are calculated using the consolidated rule instead of summing leaves
+['Non-Working Days'] = CONSOLIDATECHILDREN( 'GBL Date', 'SYS Calendar Location' );
+['Working Days'] = CONSOLIDATECHILDREN( 'SYS Calendar Measure' );
+
+FEEDERS;
+

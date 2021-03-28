@@ -4,7 +4,7 @@
 586,"BLD Dimension Control"
 585,"BLD Dimension Control"
 564,
-565,"vKH0RgnS1zXZ9IIZWXk^P>ai8Q>D@LAh_C41eMNwW17DNi=RQNKX^A0ZhQFA<VqnT5ocb6fo_7O?NwAxCThK\hor8ZVRFDN]RiPQw0\R^q3S4xGMPpP:gd]uj3Pbz2z1SWXnjaqApp<9O_qp=Z>GdUV;qVb2YbcRcJCLRYIlz>Bs5AG<JSBTgSkYUlvsJnjIT`bB4]NJ"
+565,"mlgkyr[LoN\ByaVv`N[?pbXd?2j9gkyeBxECvMkA`4bmizIuxjl:zwfWMjVSEZTup2gd4AUW_6I:^x7H:rcky12y5X34Ua5=axIGHXFT`feBvAKc4TY3`p2eLM@Va0VihwoulPs<Ij45EN2k_=96@926rUc00oh:tpmJV`[2nezmCW5Sk?c1Np6MCLLo`:xgg8YbUIZE"
 559,1
 928,0
 593,
@@ -72,7 +72,7 @@ pLogToken,""
 581,0
 582,0
 603,0
-572,53
+572,57
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -109,23 +109,27 @@ sCube_Import_Process_Name = 'BLD.Model.Import.All.Cubes';
 
 sImport_Location = pImportLocation;
 
-ExecuteProcess( sDimension_Import_Process_Name
-	,'pImportLocation', sImport_Location
-	,'pDimensionControlFileName', pDimensionControlFileName
-	,'pTargetBuildVersion', pTargetDimensionVersion
-	,'pTargetBuildProfile', pTargetBuildProfile
-	,'pTargetAction', pTargetAction
-	,'pTargetUpdateFlag', pTargetUpdateFlag
-	,'pLogToken', sLogToken);
+IF( pDimensionControlFileName @<> '' );
+	ExecuteProcess( sDimension_Import_Process_Name
+		,'pImportLocation', sImport_Location
+		,'pDimensionControlFileName', pDimensionControlFileName
+		,'pTargetBuildVersion', pTargetDimensionVersion
+		,'pTargetBuildProfile', pTargetBuildProfile
+		,'pTargetAction', pTargetAction
+		,'pTargetUpdateFlag', pTargetUpdateFlag
+		,'pLogToken', sLogToken);
+ENDIF;
 
-ExecuteProcess( sCube_Import_Process_Name
-	,'pImportLocation', sImport_Location
-	,'pCubeControlFileName', pCubeControlFileName
-	,'pTargetBuildVersion', pTargetDimensionVersion
-	,'pTargetBuildProfile', pTargetBuildProfile
-	,'pTargetAction', pTargetAction
-	,'pTargetUpdateFlag', pTargetUpdateFlag
-	,'pLogToken', sLogToken);
+IF( pCubeControlFileName @<> '' );
+	ExecuteProcess( sCube_Import_Process_Name
+		,'pImportLocation', sImport_Location
+		,'pCubeControlFileName', pCubeControlFileName
+		,'pTargetBuildVersion', pTargetDimensionVersion
+		,'pTargetBuildProfile', pTargetBuildProfile
+		,'pTargetAction', pTargetAction
+		,'pTargetUpdateFlag', pTargetUpdateFlag
+		,'pLogToken', sLogToken);
+ENDIF;
 573,5
 
 #****Begin: Generated Statements***

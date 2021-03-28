@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"dmNwa8Tvt;YaZoZpiSXic]g?@L]Le]Y;p:`Ei`j8mL0jQouEgg0;68=aDJC\Ou^@LW0;J5]6J>u=W^l]7@l<j=qnUZ`hy@1FkPyD[OIySLH6=6T11=xYjSEj7gqmh0EshQGqNc@39ey:r91OwgSQ>D9mtcjTZVwXIlzA?PzF1\gjgvP0le<GC<zRe@yTceQEHC92gNqL"
+565,"n;6dfxp\0J1=oCa6HEy4zwuR:q`VLLCf@nTKW<CrH\fR`TcW`2biClCVB82:VhIoEOjP<VWA4WI]VUy@`nyuuIWyyYDp^VNpmrc7\Hd[4>:wsL6A@TSVhMG?CHd`q5xx<7^NWm1tEGetRe;H]<5<6kq:8]_4_85<@eoGQGwn;Bd_Ipm?iKPlm?09j@_V\FG0u@akGa9m"
 559,1
 928,0
 593,
@@ -39,7 +39,7 @@ pReplaceTrailingCharacters
 2
 590,5
 pInputText,""
-pValidCharacters,"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-."
+pValidCharacters,"}abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_-."
 pReplaceInvalidWith,"_"
 pReplaceLeadingCharacters,"No"
 pReplaceTrailingCharacters,"No"
@@ -103,7 +103,7 @@ IF( sReplaceTrailingCharacters @<> 'y' );
 ENDIF;
 
 OutputFilteredText = sFilteredString;
-ASCIIOUTPUT('..\Temp\Filtered.txt', sFilteredString);
+# ASCIIOUTPUT('..\Temp\Filtered.txt', sFilteredString);
 573,3
 
 #****Begin: Generated Statements***

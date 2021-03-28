@@ -4,7 +4,7 @@
 586,"\\KRACKEN\TM1Servers\ffm-dev\import\Default\Cube_Control_v0.7.csv"
 585,"\\KRACKEN\TM1Servers\ffm-dev\import\Default\Cube_Control_v0.7.csv"
 564,
-565,"tGYNz3TXqFS`eqDa5Ry>aba`mj?Eu?jPgldP@gW2izx_OA]fCheu8uC4G`SBT4:Z^@LxUL0267C2kv]=HBV4]TQ1oNJ3\jzI;ahRoaB@Fu_Ns\Cy4dIByT]_4KC3B>s_n0j^HXvk^g_<5emURdcS\<93[@qTVdyd3tR@C9<1^Fe^au9u:PI^ihDsdH`6L@4<dvVTWUR7"
+565,"wC=2O[M[<2;LA:cS\GC7EdCaY4FqdhhPB[SDGWDxo@??sgn^tzUt9qu9RRlty;[8o:OP@`kM9bf]I[M9ssBRmYhsbK]VQ<8axZ:gyS_hab[:j7^PrfVlZn6CuQIHk4wi5lx_:=r=\YxC\KPefvTI5uir8e:p7AWVu3LL7`VnoQf4fHz4zdf3`_igBWFdXH9Z_PcDdLD<"
 559,1
 928,0
 593,
@@ -217,7 +217,7 @@ sBuild_Version = IF( pTargetBuildVersion @= '', vBuild_Version, pTargetBuildVers
 
 sCube_Import_File_Name = vCube_Source_File_Name;
 
-IF( FileExists( sImport_File_Path | '\' | sCube_Import_File_Name ) = 1 );
+IF( sCube_Import_File_Name @<> '' & FileExists( sImport_File_Path | '\' | sCube_Import_File_Name ) = 1 );
 
 	sSubsetTypeList = 'E,E,A,A';
 	sSubsetElementList = sCube_List | ',' | sBuild_Version | ',,';
@@ -234,7 +234,7 @@ ENDIF;
 
 sView_Import_File_Name = vView_Source_File_Name;
 
-IF( FileExists( sImport_File_Path | '\' | sView_Import_File_Name ) = 1 );
+IF( sView_Import_File_Name @<> '' & FileExists( sImport_File_Path | '\' | sView_Import_File_Name ) = 1 );
 
 	sSubsetTypeList = 'E,E,A,A,A';
 	sSubsetElementList = sCube_List | ',' | sBuild_Version | ',,,';

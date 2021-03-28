@@ -4,7 +4,7 @@
 586,"BLD Element Source"
 585,"BLD Element Source"
 564,
-565,"cSJa\IbJw?TW3ZMR2G]fb`7@_BS@lUz]YUy1B7tZ`mq[S1VY>Ad9YK>BJ>=QYnr<0@V@[<Fm8U0h==6z3oKAUw>Ru4Z3XEkJdgf\K6se\i4q0jl?Jo9XN;uA^\gI0T[bx2ctNLUPKFQi?9t1\RN]H<YH486eJ;DffcmC_RAe8X42Wy;=9Onoh4jof9@:tC`yPVH`33=b"
+565,"kz0ed13g^T8aOvl\i:deyKc6P^;2^v]6>1U<T^`fF:hybh=5fxfnt0j3wsZqC2ekZIB917c2l0\9xA1mfewLJX<_1k1batVgXFi3r2qri>KtY:yuT04;qGFSgo^Y`c6`xV=ebkA2<uJ?>m^I>F]DwGLlQ6n2aKb\Mqi>w:K<lq:MK`H:Caa5U7WFD_hpo^l;747mi5xD"
 559,1
 928,0
 593,
@@ -71,7 +71,7 @@ pOBLElementFormatString,""
 pOBLDisplayNameFormatString,""
 pFinYearAttributeName,""
 pDateSerialAttributeName,""
-pHierarchyType,"YTD | YTG"
+pHierarchyType,"pHierarchyType: YTD | YTG"
 pLogToken,""
 577,9
 vDimension_Version
@@ -131,7 +131,7 @@ VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 603,0
-572,184
+572,203
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -190,7 +190,6 @@ sDimension_Version_Dimension_Name = 'BLD Dimension Version';
 sHierarchy_List_Dimension_Name = 'BLD Hierarchy List';
 sElement_List_Dimension_Name = 'BLD Element List';
 
-
 ## Transform & validate parameters
 
 IF(DIMIX(sDimension_List_Dimension_Name, pDimensionList) = 0);
@@ -227,14 +226,6 @@ sHierarchy_Name = IF( sHierarchy_Name @= '', sDimension_Name, sHierarchy_Name);
 sHierarchy_Element_Source = CellGetS( sDimension_Source_Cube_Name, pDimensionList, pHierarchyList, sHierarchy_Version, 'All Hierarchy Level', 'Hierarchy Element Source' );
 sHierarchy_Element_Source = IF( sHierarchy_Element_Source @= '', 'Primary', sHierarchy_Element_Source);
 
-sPopulated_Elements_MDX = EXPAND( '{ FILTER({ EXCEPT({ TM1SUBSETALL( [BLD Element List] ) }, { [BLD Element List].[Header] }) }, [BLD Element Source].( [BLD Dimension List].[%pDimensionList%], [BLD Hierarchy List].[%sHierarchy_Element_Source%], [BLD Dimension Version].[%sHierarchy_Version%], [BLD Element Source Measure].[Action] ) <> "" )}' );
-ExecuteProcess( sCreate_Subset_MDX_Process_Name
-	,'pTargetDimension', 'BLD Element List'
-	,'pMDXQuery', sPopulated_Elements_MDX );
-
-sElement_Basis_Subset_Name = OutputSubsetName;
-
-nChild_Element_Count = SubsetGetSize( sElement_List_Dimension_Name, sElement_Basis_Subset_Name);
 
 sDimension_Type = CellGetS(sDimension_Source_Cube_Name, pDimensionList, pHierarchyList, sHierarchy_Version, 'All Hierarchy Level', 'Dimension Type');
 sDescription_Attribute = CellGetS(sDimension_Source_Cube_Name, pDimensionList, pHierarchyList, sHierarchy_Version, 'All Hierarchy Level', 'Description Attribute');
@@ -252,6 +243,34 @@ ELSE;
 	ExecuteProcess(sLog_Write_Process_Name, 'pLogToken', sLogToken, 'pMessageType', 'INFO', 'pMessage', GetProcessName() | ': Updating hierarchies for dimension [' | pDimensionList | '>>' | sDimension_Name | '] and hierarchy [' | pHierarchyList | '>>' | sHierarchy_Name | ']...');
 ENDIF;
 
+sFin_Year_Attribute_Name = CellGetS( sAttribute_Source_Cube_Name, pDimensionList, sHierarchy_Element_Source, sHierarchy_Version,  ATTRS( 'BLD Element Source Measure', pFinYearAttributeName, 'Attribute_Item_Mapping'), 'Attribute Name');
+sDate_Serial_Attribute_Name = CellGetS( sAttribute_Source_Cube_Name, pDimensionList, sHierarchy_Element_Source, sHierarchy_Version, ATTRS( 'BLD Element Source Measure', pDateSerialAttributeName, 'Attribute_Item_Mapping'), 'Attribute Name');
+
+IF( sFin_Year_Attribute_Name @= '');
+	nError_Occurred = 1;
+	sError_Message = 'The pFinYearAttributeName parameter was blank for specified dimension [' | pDimensionList | '>>' | sDimension_Name | '] and hierarchy [' | pHierarchyList | '>>' | sHierarchy_Name | '] . This is necessary to resolve the balance hierarchy. Aborting process.';
+	ProcessBreak;
+ENDIF;
+
+IF(  sDate_Serial_Attribute_Name @= '' );
+	nError_Occurred = 1;
+	sError_Message = 'The pDateSerialAttributeName parameter was blank for specified dimension [' | pDimensionList | '>>' | sDimension_Name | '] and hierarchy [' | pHierarchyList | '>>' | sHierarchy_Name | '] . This is necessary to resolve the balance hierarchy. Aborting process.';
+	ProcessBreak;
+ENDIF;
+
+## Refine the BLD Element List subset to contain only items set to "Update".
+
+sSearchAction = 'Update';
+sMDX_Element_List_Template = '{ FILTER ( {TM1SUBSETALL( [%sElement_List_Dimension_Name%] )}, [%sElement_Source_Cube_Name%].( [%sDimension_List_Dimension_Name%].[%pDimensionList%], [%sHierarchy_List_Dimension_Name%].[%sHierarchy_Element_Source%], [%sDimension_Version_Dimension_Name%].[%sHierarchy_Version%], [%sElement_Source_Cube_Name% Measure].[Action] ) = "%sSearchAction%" )}';
+sMDX_Element_List = EXPAND( sMDX_Element_List_Template );
+
+ExecuteProcess( sCreate_Subset_MDX_Process_Name
+	,'pTargetDimension', sElement_List_Dimension_Name
+	,'pMDXQuery', sMDX_Element_List );
+
+sElement_Basis_Subset_Name = OutputSubsetName;
+
+nChild_Element_Count = SubsetGetSize( sElement_List_Dimension_Name, sElement_Basis_Subset_Name);
 
 ## Setup view creation variables
 
@@ -273,8 +292,8 @@ sSource_Hierarchy_List_Element = sHierarchy_Element_Source;
 sSource_Dimension_Version_Type = 'E';
 sSource_Dimension_Version_Element = sHierarchy_Version;
 
-## [BLD Hierarchy Level]
-## We just want to read items from the 'All Elements' subset with no header
+## [BLD Element List]
+## We want to select all elements with an Action property of "Update". This subset was created earlier.
 sSource_Element_List_Type = 'S';
 sSource_Element_List_Element = sElement_Basis_Subset_Name;
 
@@ -379,7 +398,7 @@ IF( vValue @<> 'Ignore' & vValue @<> 'Delete' );
 	END;
 
 ENDIF;
-574,34
+574,38
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -405,6 +424,8 @@ IF( vValue @<> 'Ignore' & vValue @<> 'Delete' );
 	sBalance_Element_Display_Name = EXPAND( pBalanceDisplayNameFormatString );
 
 	ElementAttrPutS( sBalance_Element_Display_Name, sDimension_Name, sHierarchy_Name, sBalance_Element_Name, sDisplay_Name_Attribute );
+	ElementAttrPutS( sBalance_Element_Year, sDimension_Name, sHierarchy_Name, sBalance_Element_Name, sFin_Year_Attribute_Name );
+	ElementAttrPutS( sBalance_Element_Date_Serial, sDimension_Name, sHierarchy_Name, sBalance_Element_Name, sDate_Serial_Attribute_Name );
 
 	IF( pOBLElementFormatString @<> '' );
 		# Populate the OBL element Display Name attribute
@@ -412,9 +433,11 @@ IF( vValue @<> 'Ignore' & vValue @<> 'Delete' );
 		sOBL_Element_Display_Name = EXPAND( pOBLDisplayNameFormatString );
 
 		ElementAttrPutS( sOBL_Element_Display_Name, sDimension_Name, sHierarchy_Name, sOBL_Element_Name, sDisplay_Name_Attribute );
+		ElementAttrPutS( sBalance_Element_Year, sDimension_Name, sHierarchy_Name, sOBL_Element_Name, sFin_Year_Attribute_Name );
+		ElementAttrPutS( sBalance_Element_Date_Serial, sDimension_Name, sHierarchy_Name, sOBL_Element_Name, sDate_Serial_Attribute_Name );
 	ENDIF;
 ENDIF;
-575,27
+575,29
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -427,6 +450,8 @@ ExecuteProcess( sCube_Cleanup_Temp_Process_Name
 	,'pCubeName', sSource_Cube_Name
 	,'pViewName', sView_Name
 	,'pSubsetName', sSubset_Name);
+
+SubsetDestroy( sElement_List_Dimension_Name, sElement_Basis_Subset_Name );
 
 
 IF(nLog_Source <> 0);
@@ -474,7 +499,7 @@ ENDIF;
 917,0
 918,1
 919,0
-920,50000
+920,0
 921,""
 922,""
 923,0
