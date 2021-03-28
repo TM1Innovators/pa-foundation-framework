@@ -1,16 +1,66 @@
 ﻿FORMAT==100
+[] = S:
+	IF(
+		ATTRS('BLD Dimension List'
+				,!BLD Dimension List
+				,'Default Build Profile') @= ''
+		,STET
+		,CONTINUE);
+
+['Notes'] = S:
+	IF(
+		ATTRS('BLD Dimension List'
+				,!BLD Dimension List
+				,'Default Build Profile') @= !BLD Build Profile
+		,STET
+		,DB('BLD Dimension Control'
+			,ATTRS('BLD Dimension List'
+				,!BLD Dimension List
+				,'Default Build Profile')
+			,!BLD Dimension List
+			,!BLD Dimension Control Measure));
+
+['Action'] = S:
+	IF(
+		ATTRS('BLD Build Profile'
+			,!BLD Build Profile
+			,'Build All') @= 'Yes'
+		  % ATTRS('BLD Dimension List'
+				,!BLD Dimension List
+				,'Default Build Profile') @= !BLD Build Profile
+		,'Include'
+		,CONTINUE);
+
+[{'Update Hierarchy', 'Update Elements', 'Update Subsets'}] = S:
+	IF(
+		ATTRS('BLD Build Profile'
+			,!BLD Build Profile
+			,'Build All') @= 'Yes'
+		,'Yes'
+		,CONTINUE);
+
+['Build Version'] = S:
+	IF(
+		ATTRS('BLD Build Profile'
+			,!BLD Build Profile
+			,'Use Default Version') @= 'Yes'
+		  & DB('BLD Dimension Control'
+			,!BLD Build Profile
+			,!BLD Dimension List
+			,'Action') @<> ''
+		  & ATTRS('BLD Dimension List'
+				,!BLD Dimension List
+				,'Default Build Profile') @<> !BLD Build Profile
+		,DB('BLD Dimension Control'
+			,ATTRS('BLD Dimension List'
+				,!BLD Dimension List
+				,'Default Build Profile')
+			,!BLD Dimension List
+			,!BLD Dimension Control Measure)
+		,CONTINUE);
+
 [{'Hierarchy Version', 'Element Version', 'Subset Version'}] = S:
 	DB('BLD Dimension Control'
 		,!BLD Build Profile
 		,!BLD Dimension List
 		,'Build Version');
-
-['Notes', 'Default'] = S:
-	STET;
-
-['Notes'] = S:
-	DB('BLD Dimension Control'
-		,'Default'
-		,!BLD Dimension List
-		,!BLD Dimension Control Measure);
-

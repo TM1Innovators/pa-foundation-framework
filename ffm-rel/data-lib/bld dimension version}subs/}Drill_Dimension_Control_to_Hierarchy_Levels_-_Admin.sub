@@ -1,0 +1,10 @@
+﻿283,100
+284,"}Drill_Dimension_Control_to_Hierarchy_Levels_-_Admin"
+11,20210126061117
+274,
+18,0
+275,66
+{ TM1SubsetToSet( [BLD Dimension Version], 'Default', 'public' ) }
+278,0
+281,0
+270,0

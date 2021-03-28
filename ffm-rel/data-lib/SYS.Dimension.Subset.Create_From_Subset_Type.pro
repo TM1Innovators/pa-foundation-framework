@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"qQOHWH`T6lH3WvI@1a`4[M8P:XI3Tl509ONRCfUw2vBcaSGLLbj5I:njHoV:LClHzcdWtjns]?WEv59BngueX^rj64lkOyCPxc97\Du[<\9K_yDwBZe7zpVEbuHI=;c0xpXx`creL1W^l;SseHEZA]A5uWbtG0TT\CNC@1xsUYaJezW[9FN3DoO]eHxo3X7RERVe>3mv"
+565,"vfSmAVLTIz^^[ky6sfMqY5apMCunAwk8v\w@]Jvlt\4GrIowk5H2B@c>cDR9eDiN5t1=pfL?s_bpzD=I;c=Y44k4_wx2ri@C7wLdAl67SW_fst3a8@vD]qg=mglg9q^uZ[F7e]=y<r3y@fEWh5yflWULTt7swyRogasIhRG0c[0cF6t\NfAJBifCZ:xaVrZdlxO_QxzL"
 559,1
 928,0
 593,
@@ -25,30 +25,34 @@
 569,0
 592,0
 599,1000
-560,6
+560,7
 pSubsetType
 pDimensionName
+pHierarchyName
 pSelectionElement
 pSelectionText
 pSubsetName
 pOverwrite
-561,6
+561,7
+2
 2
 2
 2
 2
 2
 1
-590,6
+590,7
 pSubsetType,""
 pDimensionName,""
+pHierarchyName,""
 pSelectionElement,""
 pSelectionText,""
 pSubsetName,""
 pOverwrite,1
-637,6
+637,7
 pSubsetType,""
 pDimensionName,""
+pHierarchyName,""
 pSelectionElement,""
 pSelectionText,""
 pSubsetName,""
@@ -60,7 +64,7 @@ pOverwrite,""
 581,0
 582,0
 603,0
-572,69
+572,79
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -92,8 +96,8 @@ sUniqueStringCreateProcessName = 'SUB.Text.String.Create_Unique';
 
 sControlCubeName = 'SYS Control';
 
-sSubsetTypeDimensionName = CellGetS(sControlCubeName, 'Current Environment', 'Subset Type Dimension');
-sSubsetTypeDimensionName = IF(sSubsetTypeDimensionName @<> '', sSubsetTypeDimensionName, 'SYS Subset Type');
+sSubsetTypeDimensionName = CellGetS( sControlCubeName, 'Current Environment', 'Subset Type Dimension' );
+sSubsetTypeDimensionName = IF( sSubsetTypeDimensionName @<> '', sSubsetTypeDimensionName, 'SYS Subset Type' );
 
 sSubsetName = '';
 IF(pSubsetName @<> '');
@@ -103,29 +107,39 @@ ELSE;
 	sSubsetName = OutputTempName;
 ENDIF;
 
-IF(pOverwrite = 1 & SubsetExists(pDimensionName, sSubsetName) = 1);
-	SubsetDestroy(pDimensionName, sSubsetName);
+
+sDimension_Name = pDimensionName;
+sHierarchy_Name = IF( pHierarchyName @<> '', pHierarchyName, sDimension_Name );
+
+IF( HierarchySubsetExists( sDimension_Name, sHierarchy_Name, sSubsetName) = 1);
+	IF( pOverwrite = 1 );
+	 	HierarchySubsetMDXSet( sDimension_Name, sHierarchy_Name, sSubsetName, '' );
+		HierarchySubsetDeleteAllElements( sDimension_Name, sHierarchy_Name, sSubsetName );
+	ELSE;
+		ItemReject( 'The subset already exists. To overwrite the subset, set the pOverwrite parameter to 1. Exiting process.' );
+		ProcessError;
+	ENDIF;
+ELSE;
+	HierarchySubsetCreate( sDimension_Name, sHierarchy_Name, sSubsetName );
 ENDIF;
 
-SubsetCreate(pDimensionName, sSubsetName);
 
 IF(pSubsetType @<> '');
 
-	sDimension_Name = pDimensionName;
 	sElement_Name = pSelectionElement;
 	sText_Value = pSelectionText;
-	sMDX = ATTRS(sSubsetTypeDimensionName, pSubsetType, 'MDX');
+	sMDX = ATTRS( sSubsetTypeDimensionName, pSubsetType, 'MDX' );
 
-	SubsetMDXSet(sDimension_Name, sSubsetName, EXPAND(sMDX));
+	HierarchySubsetMDXSet( sDimension_Name, sHierarchy_Name, sSubsetName, EXPAND( sMDX ));
 
 	IF( pSubsetType @= 'Static');
-		SubsetMDXSet(sDimension_Name, sSubsetName, '');
+		HierarchySubsetMDXSet( sDimension_Name, sHierarchy_Name, sSubsetName, '' );
 	ENDIF;
 ELSE;
 	IF(pSelectionElement @<> '');
-		SubsetElementInsert(pDimensionName, sSubsetName, pSelectionElement, 1);
+		HierarchySubsetElementInsert(pDimensionName, sHierarchy_Name, sSubsetName, pSelectionElement, 1);
 	ELSE;
-		SubsetIsAllSet(pDimensionName, sSubsetName, 1);
+		HierarchySubsetIsAllSet(pDimensionName, sHierarchy_Name, sSubsetName, 1);
 	ENDIF;
 ENDIF;
 

@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"wyVWIP1OqW]OWJY097L=Cr@aVDxOK8KWPJ0oY1nxKB`mIf=m<F;ra0\P:_1`OuMaiwu7?gF?Q[m7[U2CohZqJ?pfNww=ai@y4WA2`sTyw=?Q1O?mE\P28fPh2pui;MR1yhr[pPA55aOtPs@S;TQI0eSXETNKqq92;Yt9OO^m`1VkBy_jOOnvWfVJ[5F:5Ze36KJ4r47P"
+565,"x3dccqS]sy_HNj6jA32aAL35ar?jJW5`aAVhJoQRO2xGdzeKglpw=_5z0i[]g\JKJtgjytQXA]V?xOSAmTV5c2Nc<8xOv34v^m4oP=[KMU8hYZhHIFz?CipKv4XZVBrR9Og053Y7P5cJJ:r:nhf`=yWztiRW[NSiZ26@CmxbDaE?ot<_oFKN3aGkBz]lZ3T=5uTxw;aQ"
 559,1
 928,0
 593,
@@ -100,7 +100,7 @@ ENDIF;
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
-575,19
+575,21
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -108,8 +108,10 @@ ENDIF;
 CellPutN(nNow, sLogCubeName, sLogDate, sLogSource, sLogEntry, sLogLine, 'Start Time');
 CellPutS(sLogUser, sLogCubeName, sLogDate, sLogSource, sLogEntry, sLogLine, 'User');
 
-CellPutS(sLogDate, 'ADM Log Control', sLogUser,  sLogSource, 'Current Log Date');
-CellPutS(sLogEntry, 'ADM Log Control', sLogUser,  sLogSource, 'Current Log Entry');
+IF( DIMIX( '}Clients', sLogUser ) <> 0 );
+	CellPutS(sLogDate, 'ADM Log Control', sLogUser,  sLogSource, 'Current Log Date');
+	CellPutS(sLogEntry, 'ADM Log Control', sLogUser,  sLogSource, 'Current Log Entry');
+ENDIF;
 
 IF(sLogLine @= 'Summary');
 	CellPutN(1, sLogCubeName, sLogDate, sLogSource, sLogEntry, sLogLine, 'Error Flag');

@@ -1,17 +1,66 @@
 ﻿FORMAT==100
+[] = S:
+	IF(
+		ATTRS('BLD Cube List'
+				,!BLD Cube List
+				,'Default Build Profile') @= ''
+		,STET
+		,CONTINUE);
+
+['Notes'] = S:
+	IF(
+		ATTRS('BLD Cube List'
+				,!BLD Cube List
+				,'Default Build Profile') @= !BLD Build Profile
+		,STET
+		,DB('BLD Cube Control'
+			,ATTRS('BLD Cube List'
+				,!BLD Cube List
+				,'Default Build Profile')
+			,!BLD Cube List
+			,!BLD Cube Control Measure));
+
+['Action'] = S:
+	IF(
+		ATTRS('BLD Build Profile'
+			,!BLD Build Profile
+			,'Build All') @= 'Yes'
+		  % ATTRS('BLD Cube List'
+				,!BLD Cube List
+				,'Default Build Profile') @= !BLD Build Profile
+		,'Include'
+		,CONTINUE);
+
+[{'Update Cube', 'Update Views'}] = S:
+	IF(
+		ATTRS('BLD Build Profile'
+			,!BLD Build Profile
+			,'Build All') @= 'Yes'
+		,'Yes'
+		,CONTINUE);
+
+['Build Version'] = S:
+	IF(
+		ATTRS('BLD Build Profile'
+			,!BLD Build Profile
+			,'Use Default Version') @= 'Yes'
+		  & DB('BLD Cube Control'
+			,!BLD Build Profile
+			,!BLD Cube List
+			,'Action') @<> ''
+		  & ATTRS('BLD Cube List'
+				,!BLD Cube List
+				,'Default Build Profile') @<> !BLD Build Profile
+		,DB('BLD Cube Control'
+			,ATTRS('BLD Cube List'
+				,!BLD Cube List
+				,'Default Build Profile')
+			,!BLD Cube List
+			,!BLD Cube Control Measure)
+		,CONTINUE);
+
 [{'Cube Version', 'View Version'}] = S:
 	DB('BLD Cube Control'
 		,!BLD Build Profile
 		,!BLD Cube List
 		,'Build Version');
-
-['Notes', 'Default'] = S:
-	STET;
-
-['Notes'] = S:
-	DB('BLD Cube Control'
-		,'Default'
-		,!BLD Cube List
-		,!BLD Cube Control Measure);
-
-
