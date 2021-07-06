@@ -3,9 +3,9 @@ Planning Analytics (TM1) Foundation Framework
 
 As Planning Analytics TM1 consultants, we've learned to work around a bunch of limitations in the development lifecycle of the IBM Planning Analytics software ecosystem. In fact, we've been doing it so long, we probably don't even realise how bad some of our habits are -- but more and more, clients are starting to notice!
 
-You probably *think* you're following best practice (and you are doing your best under the circumstances), but the same questions keep coming up:
+You're probably doing your best to follow best practice, but have you noticed the same questions keep coming up?
 
-- Can you delegate dimension & attribute updates to appropriate end-users or SMEs
+- Can you delegate dimension & attribute updates to appropriate end-users or SMEs?
 - Do you have an approval process in place to evaluate and accept model changes?
 - How do you keep track of versions of model objects and deployment batches ?
 - Do you have visibility over who made changes to what model objects and when?
