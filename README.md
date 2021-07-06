@@ -14,7 +14,7 @@ You're probably doing your best to follow best practice, but have you noticed th
 - Do your client-side administrators have enough logging information without digging around in poorly-organised files?
 - Is your model consistently-named and easily browsable by an end user?
 
-If any of these questions are difficult to answer, The Planning Analytics Foundation Framework (PAFF) may provide a solution.
+If any of these questions are difficult to answer, the Planning Analytics Foundation Framework (PAFF) may provide a solution.
 
 PAFF is a build management system for Planning Analytics TM1. It does not prescribe or dictate process -- it merely provides the tools required to implement them in line with your client's needs.
 
