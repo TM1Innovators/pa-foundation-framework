@@ -22,4 +22,6 @@ By separating model design from implementation, it encourages standardization, m
 
 Features such as in-cube logging, algorithmic generation of subsets, and attribute-based hierarchies ensure consistency and reusability across the entire model, while PAFF also facilitates migration between servers, removing the uncertainty around deploying changes between environments.
 
-It's the framework you probably never realised you needed.
+It's the framework you probably never realised you needed. 
+
+I'm providing it free and unrestricted to the TM1 community in the hope that it lifts the overall quality of TM1 implementations and keeps our favourite planning application competitive against distruptive new products.
