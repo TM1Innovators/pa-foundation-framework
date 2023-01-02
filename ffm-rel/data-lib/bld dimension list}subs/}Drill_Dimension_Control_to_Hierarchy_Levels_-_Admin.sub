@@ -1,10 +1,10 @@
 ﻿283,100
 284,"}Drill_Dimension_Control_to_Hierarchy_Levels_-_Admin"
-11,20210126061117
+11,20210531053854
 274,
 18,0
-275,36
-{ [ BLD Dimension List].[GBL Week] }
+275,40
+{ [ BLD Dimension List].[REV Customer] }
 278,0
 281,0
 270,0

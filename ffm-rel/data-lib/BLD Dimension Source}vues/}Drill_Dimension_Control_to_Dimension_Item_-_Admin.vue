@@ -24,8 +24,8 @@
 7,BLD Dimension Source Measure
 6,}Drill_Dimension_Control_to_Dimension_Item_-_Admin
 373,3
-2,v1.1
-1,GBL Period
+1,v1.0
+1,IMP Data Source List
 1,Primary
 372,0
 372,00
@@ -44,5 +44,5 @@
 0
 0
 0
-11,20210126033855
+11,20210822105128
 381,0
