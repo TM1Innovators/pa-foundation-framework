@@ -13,15 +13,9 @@
 		,CONTINUE);
 
 ['Default', 'Subset Name'] = S: 'Default';
-['Default', 'Display Alias'] = S:
-	DB('BLD Dimension Source'
-		,!BLD Dimension List
-		,!BLD Hierarchy List
-		,!BLD Dimension Version
-		,'All Hierarchy Level'
-		,'Display Name Attribute');
+['Default', 'Display Alias'] = S: 'Display Name';
 ['Default', 'Expand Type'] = S: 'Below';
-# ['Default', 'Subset Type'] = S: 'Static';
+['Default', 'Subset Type'] = S: 'Static';
 ['Default', 'Element Type'] = S: 'A - All Elements';
 ['Default', 'Element Name'] = S: '';
 ['Default', 'Sort Type'] = S: 'Hierarchize';
@@ -35,7 +29,7 @@
 
 ['Leaf', 'Display Alias'] = S: 'Display Name';
 ['Leaf', 'Expand Type'] = S: 'Below';
-# ['Leaf', 'Subset Type'] = S: 'Static';
+['Leaf', 'Subset Type'] = S: 'Static';
 ['Leaf', 'Element Type'] = S: 'L - All Leaf Elements';
 ['Leaf', 'Element Name'] = S: '';
 ['Leaf', 'Sort Type'] = S: 'Hierarchize';
@@ -67,10 +61,12 @@
 ['Dimension Name'] = S:
 	IF(
 		DB('BLD Dimension Control'
+			,'Current Environment'
 			,'Default'
 			,!BLD Dimension List
 			,'Dimension Name') @<> ''
 		,DB('BLD Dimension Control'
+			,'Current Environment'
 			,'Default'
 			,!BLD Dimension List
 			,'Dimension Name')

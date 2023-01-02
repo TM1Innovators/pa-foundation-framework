@@ -1,10 +1,13 @@
 ﻿283,100
 284,"Leaf Elements"
-11,20211017020510
+11,20201206133611
 274,Display Name
 18,0
-275,82
-{ HIERARCHIZE( { TM1FilterByLevel( {TM1SubsetAll( [SYS MDX Sort Type] )}, 0) } ) }
+275,
 278,0
 281,0
-270,0
+270,4
+E
+I
+H
+N

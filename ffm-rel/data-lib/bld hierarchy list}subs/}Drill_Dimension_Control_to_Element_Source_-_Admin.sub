@@ -1,30 +1,10 @@
 ﻿283,100
 284,"}Drill_Dimension_Control_to_Element_Source_-_Admin"
-11,20220206223009
+11,20210206041904
 274,
 18,0
-275,
+275,63
+{ TM1SubsetToSet( [BLD Hierarchy List], 'Default', 'public' ) }
 278,0
 281,0
-270,21
-Primary
-Hierarchy 001
-Hierarchy 002
-Hierarchy 003
-Hierarchy 004
-Hierarchy 005
-Hierarchy 006
-Hierarchy 007
-Hierarchy 008
-Hierarchy 009
-Hierarchy 010
-Hierarchy 011
-Hierarchy 012
-Hierarchy 013
-Hierarchy 014
-Hierarchy 015
-Hierarchy 016
-Hierarchy 017
-Hierarchy 018
-Hierarchy 019
-Hierarchy 020
+270,0

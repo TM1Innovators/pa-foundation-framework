@@ -4,7 +4,7 @@
 586,"BLD Dimension Source"
 585,"BLD Dimension Source"
 564,
-565,"q1MdJaxu5DzzR?t74aMxd0sZ?NEhwnpwkzUi@Hl<LYOr@ETI@_@Fu3<`_IvBisQ11DLnvvloSDTfPHzdId:CK;L5F:pDbNRanaU@E4xY@msPw?9wRWRszV?l4V=UnTXv9o?\27t>3RH9TfB;Uug`<9TnlGuu7dL1:iz1[1Xu1Z`ZgveCMnSauRU]pD`y3j\<;tlqg?_^"
+565,"lxU>s3Y9FFCPaD=pUB9l\]Nk`en3q\zCAL;M?7gnVZ8p3wI6Lc>6oE4ONq1RKl5Uxw5[@_p>:S:HFwWudojD]FaqypAyXFbszZaA<ZsDg`uv0P;ES]yZ^g3ohf6@aW9ug7fqGHW?\9@dNKE4KYDJJ:hwL@9oc=KsfwFjy?i3^hu4DVt[JT_T4^\7w6z;3q<GQSe[xsLa"
 559,1
 928,0
 593,
@@ -99,7 +99,7 @@ VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 603,0
-572,133
+572,129
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -135,8 +135,7 @@ sCube_Cleanup_Temp_Process_Name = 'SYS.Cube.View.Cleanup_Temp';
 
 sProcess_Execute_Process_Name = 'BLD.Model.Process.Execute';
 
-sHierarchy_Update_Cube_Process_Name = 'BLD.Model.Update.Hierarchy.cub';
-sHierarchy_Update_Subset_Process_Name = 'BLD.Model.Update.Hierarchy.sub';
+sHierarchy_Update_Process_Name = 'BLD.Model.Update.Hierarchy';
 sElement_Update_Process_Name = 'BLD.Model.Update.Element';
 sHierarchy_Weighting_Update_Process_Name = 'BLD.Model.Update.Hierarchy.Weighting';
 sSubset_Update_Process_Name = 'BLD.Model.Update.Subset';
@@ -146,9 +145,6 @@ sSource_Measure_Name = sSource_Cube_Name | ' Measure';
 
 sDimension_Control_Cube_Name = 'BLD Dimension Control';
 sDimension_Source_Cube_Name = 'BLD Dimension Source';
-
-sAttribute_Source_Cube_Name = 'BLD Attribute Source';
-sAttribute_List_Dimension_Name = 'BLD Attribute List';
 
 ## Get Dimension Control Properties
 
@@ -233,13 +229,7 @@ DataSourceType = 'VIEW';
 DatasourceNameForServer = sSource_Cube_Name;
 DatasourceNameForClient = sSource_Cube_Name;
 DatasourceCubeView = sView_Name;
-573,5
-
-#****Begin: Generated Statements***
-#****End: Generated Statements****
-
-
-574,49
+573,37
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -251,7 +241,6 @@ sDimension_Name = CellGetS( sDimension_Source_Cube_Name, vDimension_List, vHiera
 sDimension_Name = IF( sDimension_Name @= '', vDimension_List, sDimension_Name);
 sHierarchy_Name = CellGetS( sDimension_Source_Cube_Name, vDimension_List, vHierarchy_List, vDimension_Version, 'All Hierarchy Level', 'Hierarchy Name' );
 sHierarchy_Name = IF( sHierarchy_Name @= '', sDimension_Name, sHierarchy_Name);
-sHierarchy_Element_Basis = CellGetS( sDimension_Source_Cube_Name, vDimension_List, vHierarchy_List, vDimension_Version, 'All Hierarchy Level', 'Hierarchy Element Basis' );
 sBuild_Process_Name = CellGetS( sDimension_Source_Cube_Name, vDimension_List, vHierarchy_List, vDimension_Version, 'All Hierarchy Level', 'Build Process Name' );
 sBuild_Process_Parameter_Set = CellGetS( sDimension_Source_Cube_Name, vDimension_List, vHierarchy_List, vDimension_Version, 'All Hierarchy Level', 'Build Process Parameter Set' );
 
@@ -260,15 +249,7 @@ IF(vValue @<> 'Ignore' & vValue @<> 'Delete');
 	ExecuteProcess( sLog_Write_Process_Name, 'pLogToken', sLogToken, 'pMessageType', 'INFO', 'pMessage', GetProcessName() | ': Processing dimension [' | vDimension_List | '>>' | sDimension_Name | '] and hierarchy [' | vHierarchy_List | '>>' | sHierarchy_Name | ']. The Action parameter is set to [' | vValue | '].' );
 
 	ExecuteProcess( sElement_Update_Process_Name, 'pBuildProfile', sSource_Build_Profile_Element, 'pDimensionList', vDimension_List, 'pHierarchyList', vHierarchy_List, 'pLogToken', sLogToken );
-
-	## NOTE: 	We may need more than one build process. Some will build elements and attributes and will want to be run before the hierarchy update,
-	##	while others might build a hierarchy based on the elements and attributes, which would require the reverse order.
-
-	IF( sHierarchy_Element_Basis @= 'Subset' );
-		ExecuteProcess( sHierarchy_Update_Subset_Process_Name, 'pBuildProfile', sSource_Build_Profile_Element, 'pDimensionList', vDimension_List, 'pHierarchyList', vHierarchy_List, 'pLogToken', sLogToken );
-	ELSE;
-		ExecuteProcess( sHierarchy_Update_Cube_Process_Name, 'pBuildProfile', sSource_Build_Profile_Element, 'pDimensionList', vDimension_List, 'pHierarchyList', vHierarchy_List, 'pLogToken', sLogToken );
-	ENDIF;
+	ExecuteProcess( sHierarchy_Update_Process_Name, 'pBuildProfile', sSource_Build_Profile_Element, 'pDimensionList', vDimension_List, 'pHierarchyList', vHierarchy_List, 'pLogToken', sLogToken );
 
 	IF( ProcessExists( sBuild_Process_Name ) = 1 );
 		# ExecuteProcess( sBuild_Process_Name, 'pBuildProfile', sSource_Build_Profile_Element, 'pDimensionList', vDimension_List, 'pHierarchyList', vHierarchy_List, 'pLogToken', sLogToken );
@@ -281,12 +262,30 @@ IF(vValue @<> 'Ignore' & vValue @<> 'Delete');
 			,'pParameter04Name', 'pLogToken', 'pParameter04Value', sLogToken );
 	ENDIF;
 
-	ExecuteProcess( sHierarchy_Weighting_Update_Process_Name, 'pBuildProfile', sSource_Build_Profile_Element, 'pDimensionList', vDimension_List, 'pHierarchyList', vHierarchy_List, 'pLogToken', sLogToken );
-	ExecuteProcess( sSubset_Update_Process_Name, 'pBuildProfile', sSource_Build_Profile_Element, 'pDimensionList', vDimension_List, 'pHierarchyList', vHierarchy_List, 'pLogToken', sLogToken );
-
 ELSE;
 
 	ExecuteProcess( sLog_Write_Process_Name, 'pLogToken', sLogToken, 'pMessageType', 'INFO', 'pMessage', GetProcessName() | ': Skipping dimension [' | vDimension_List | '>>' | sDimension_Name | '] and hierarchy [' | vHierarchy_List | '>>' | sHierarchy_Name | ']. The Action parameter is set to [' | vValue | '].' );
+
+ENDIF;
+574,20
+
+#****Begin: Generated Statements***
+#****End: Generated Statements****
+
+## Load and validate properties from [BLD Dimension Source]
+
+sAction = CellGetS( sDimension_Source_Cube_Name, vDimension_List, vHierarchy_List, vDimension_Version, 'All Hierarchy Level', 'Action' );
+sDimension_Name = CellGetS( sDimension_Source_Cube_Name, vDimension_List, vHierarchy_List, vDimension_Version, 'All Hierarchy Level', 'Dimension Name' );
+sDimension_Name = IF( sDimension_Name @= '', vDimension_List, sDimension_Name);
+sHierarchy_Name = CellGetS( sDimension_Source_Cube_Name, vDimension_List, vHierarchy_List, vDimension_Version, 'All Hierarchy Level', 'Hierarchy Name' );
+sHierarchy_Name = IF( sHierarchy_Name @= '', sDimension_Name, sHierarchy_Name);
+sBuild_Process_Name = CellGetS( sDimension_Source_Cube_Name, vDimension_List, vHierarchy_List, vDimension_Version, 'All Hierarchy Level', 'Build Process Name' );
+sBuild_Process_Parameter_Set = CellGetS( sDimension_Source_Cube_Name, vDimension_List, vHierarchy_List, vDimension_Version, 'All Hierarchy Level', 'Build Process Parameter Set' );
+
+IF(vValue @<> 'Ignore' & vValue @<> 'Delete');
+
+	ExecuteProcess( sHierarchy_Weighting_Update_Process_Name, 'pBuildProfile', sSource_Build_Profile_Element, 'pDimensionList', vDimension_List, 'pHierarchyList', vHierarchy_List, 'pLogToken', sLogToken );
+	ExecuteProcess( sSubset_Update_Process_Name, 'pBuildProfile', sSource_Build_Profile_Element, 'pDimensionList', vDimension_List, 'pHierarchyList', vHierarchy_List, 'pLogToken', sLogToken );
 
 ENDIF;
 575,23

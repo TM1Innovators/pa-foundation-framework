@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"bsa\ndxd<`duE>NkyMvh[BluC`_;ezn@Vi\n<[v2eDcsfgGtTUlf5Nu@FAjx`H4mvRmhDP9LW84ousD0bgsu1K6?xsz_A^L\J2W2iYMQSm0[:ob=PSB4Qx0Wbv0aCB@cm`B6PyzaNMv\W9qiG@9f@hlu98iP0Y?e=sOSqVnO@N_jHj\F\hkJF?\zkCf0lHNf:Y`Q1pr0"
+565,"mE7_\711\]Gfma0zU2v1qE1Nj2p=K\2Y;h>1\BfCzR`4m_MS@LFY9ddy38^5MM204u5?EJ=1\s]ZO:twg2:dn5Gn`?>bK<epflO70wu?:eY81r<=g5n8vvv3o]H5gq<e5A6bjPag:md_=W[;p[wUpqMrXmpRsqHg859Ym_LT\tL<uOE\0Zy\xj<Wv^:vbQ4\mAEFrH`H"
 559,1
 928,0
 593,
@@ -48,14 +48,12 @@
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
-575,7
+575,5
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
-
-sScriptFilePath = CellGetS( 'SYS Control', 'Current Environment', 'Scripts Path');
-ExecuteCommand( 'cmd /c "' | sScriptFilePath | '\Responder\Flow.Responder.Application.exe"', 0);
+ExecuteCommand( 'cmd /c "..\script\Responder\Flow.Responder.Application.exe"', 0);
 576,CubeAction=1511DataAction=1503CubeLogChanges=0
 930,0
 638,1

@@ -1,10 +1,10 @@
 ﻿601,100
 602,"BLD.Model.Import.All.Cubes"
 562,"CHARACTERDELIMITED"
-586,"C:\TM1Servers\ffm-dev\import\sample\Cube_Control.csv"
-585,"C:\TM1Servers\ffm-dev\import\sample\Cube_Control.csv"
+586,"\\KRACKEN\TM1Servers\ffm-dev\import\Default\Cube_Control_v0.7.csv"
+585,"\\KRACKEN\TM1Servers\ffm-dev\import\Default\Cube_Control_v0.7.csv"
 564,
-565,"s_oEMzKGBbJ>DnAHQ=Ea>k6hMGdVTeU=Y9L7rXDDnYJjwQu=j_xczW<]ZU?yF2jXAN<^bJr`[jmFr0?vV[tgF6LQYit2R@JIBo=N6?H`c3e@J_rybo\a\JJ39E<llQqx>TR_O3wl=OZoo6U4NDzH=qQ9o`QoQdvaC7Z72;tYd<Oz6^oU748DUa_6b]X4p30IJp_M36=r"
+565,"wC=2O[M[<2;LA:cS\GC7EdCaY4FqdhhPB[SDGWDxo@??sgn^tzUt9qu9RRlty;[8o:OP@`kM9bf]I[M9ssBRmYhsbK]VQ<8axZ:gyS_hab[:j7^PrfVlZn6CuQIHk4wi5lx_:=r=\YxC\KPefvTI5uir8e:p7AWVu3LL7`VnoQf4fHz4zdf3`_igBWFdXH9Z_PcDdLD<"
 559,1
 928,0
 593,
@@ -179,7 +179,7 @@ DataSourceType = 'CHARACTERDELIMITED';
 DatasourceNameForServer = sCube_Control_Full_Path;
 DatasourceNameForClient = sCube_Control_Full_Path;
 DatasourceASCIIHeaderRecords = 1;
-573,23
+573,22
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -190,7 +190,6 @@ ENDIF;
 
 sCube_List = vCube_List;
 sBuild_Version = IF( pTargetBuildVersion @= '', vBuild_Version, pTargetBuildVersion );
-sBuild_Profile = IF( pTargetBuildProfile @= '', vBuild_Profile, pTargetBuildProfile );
 
 IF( DIMIX( sCube_List_Dimension_Name, sCube_List ) = 0);
 	DimensionElementInsert( sCube_List_Dimension_Name, '', sCube_List, 'n' );
@@ -200,10 +199,10 @@ IF( DIMIX( sCube_Version_Dimension_Name, sBuild_Version ) = 0);
 	DimensionElementInsert( sCube_Version_Dimension_Name, '', sBuild_Version, 'n' );
 ENDIF;
 
-IF( DIMIX ( sBuild_Profile_Dimension_Name, pTargetBuildProfile) = 0 );
-	DimensionElementInsert ( sBuild_Profile_Dimension_Name, '', sBuild_Profile, 'n' );
+IF( pTargetBuildProfile @<> '' & DIMIX ( sBuild_Profile_Dimension_Name, pTargetBuildProfile) = 0 );
+	DimensionElementInsert ( sBuild_Profile_Dimension_Name, '', pTargetBuildProfile, 'n' );
 ENDIF;
-574,56
+574,58
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -214,7 +213,7 @@ ENDIF;
 
 sCube_List = vCube_List;
 sBuild_Version = IF( pTargetBuildVersion @= '', vBuild_Version, pTargetBuildVersion );
-sBuild_Profile = IF( pTargetBuildProfile @= '', vBuild_Profile, pTargetBuildProfile );
+
 
 sCube_Import_File_Name = vCube_Source_File_Name;
 
@@ -249,17 +248,19 @@ IF( sView_Import_File_Name @<> '' & FileExists( sImport_File_Path | '\' | sView_
 
 ENDIF;
 
-sAction = IF( pTargetAction @<> '', pTargetAction, 'Include');
-sUpdate_Cube = IF( pTargetUpdateFlag @<> '', pTargetUpdateFlag, vUpdate_Cube );
-sUpdate_Views = IF( pTargetUpdateFlag @<> '', pTargetUpdateFlag, vUpdate_Views );
 
-## TODO: Update BLD Cube Control cube
-CellPutS( sAction, sCube_Control_Cube_Name, sBuild_Profile, sCube_List, 'Action' );
-CellPutS( sBuild_Version, sCube_Control_Cube_Name, sBuild_Profile, sCube_List, 'Build Version' );
-CellPutS( sUpdate_Cube, sCube_Control_Cube_Name, sBuild_Profile, sCube_List, 'Update Cube' );
-CellPutS( sUpdate_Views, sCube_Control_Cube_Name, sBuild_Profile, sCube_List, 'Update Views' );
+IF( pTargetBuildProfile @<> '' );
 
-ElementAttrPutS( sBuild_Profile, 'BLD Cube List', 'BLD Cube List', vCube_List, 'Default Build Profile' );
+	sAction = IF( pTargetAction @<> '', pTargetAction, 'Include');
+	sUpdate_Cube = IF( pTargetUpdateFlag @<> '', pTargetUpdateFlag, vUpdate_Cube );
+	sUpdate_Views = IF( pTargetUpdateFlag @<> '', pTargetUpdateFlag, vUpdate_Views );
+
+	## TODO: Update BLD Cube Control cube
+	CellPutS( sAction, sCube_Control_Cube_Name, pTargetBuildProfile, sCube_List, 'Action' );
+	CellPutS( sBuild_Version, sCube_Control_Cube_Name, pTargetBuildProfile, sCube_List, 'Build Version' );
+	CellPutS( sUpdate_Cube, sCube_Control_Cube_Name, pTargetBuildProfile, sCube_List, 'Update Cube' );
+	CellPutS( sUpdate_Views, sCube_Control_Cube_Name, pTargetBuildProfile, sCube_List, 'Update Views' );
+ENDIF;
 575,17
 
 #****Begin: Generated Statements***

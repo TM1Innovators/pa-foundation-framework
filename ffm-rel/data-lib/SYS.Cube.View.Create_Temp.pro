@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"mGsu:yofjmwbEa\ZYX:5Jy4MsuRmTHDAF@jbec@XH7?iQ<S\uO=RRve7PuuaFl7j6g0iV>zAe0J@1r>`aA0ePQ]ZiZACT]ai7h:3nD5WEyxs9n;vCnIddlG;NPrhvlP`>gC]uY]VCx^OOX_FmCdfdiLE3D2l:xxTO^W0BnR6a`^d8y[2dFhLBfVEvtTs=p@Pa^FcA@]u"
+565,"v3WiYDchQ[b:t\bZcnbIHwaLQy9\oAw>so\j97o:_2T2a;QMUS24kTK`ZGxa;mk8kzkk8]Jw4\;31G`VSCAlIYAiOxqt6QQ;pmQgp:QhffoMic[qMWAkjMe?[aWjNtcUhVtd=z40DDOucv6[p;kCM5n4V11;7hQC0M=lm>:g6udFFK>meC8:jl4AeA?Nv[<FB^IT0Rl0"
 559,1
 928,0
 593,
@@ -72,7 +72,7 @@ pOverwriteView,""
 581,0
 582,0
 603,0
-572,132
+572,131
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -145,18 +145,17 @@ WHILE(nCurrentDimensionIndex <= nDimensionCount);
 	sCurrentDimensionName = OutputItem;
 
 	ExecuteProcess(sListStringReadProcessName, 'pItemList', pSubsetTypeList, 'pItemIndex', nCurrentDimensionIndex, 'pTrimQuoteCharacters', 1);
-	sCurrentElementTypeName = OutputItem;
+	sCurrentSubsetTypeName = OutputItem;
 
 	ExecuteProcess(sListStringReadProcessName, 'pItemList', pSubsetElementList, 'pItemIndex', nCurrentDimensionIndex, 'pTrimQuoteCharacters', 1);
-	sCurrentSelectionElementName = OutputItem;
+	sCurrentSubsetElementName = OutputItem;
 
 	## Create a subset based on the current SubsetType
 	ExecuteProcess( sCreate_Subset_Type_Process_Name
-		,'pElementType', sCurrentElementTypeName
+		,'pSubsetType', sCurrentSubsetTypeName
 		,'pDimensionName', sCurrentDimensionName
-		,'pSelectionElement', sCurrentSelectionElementName
+		,'pSelectionElement', sCurrentSubsetElementName
 		,'pSubsetName', sSubsetName
-		,'pSubsetType', 'Static'
 		,'pOverwrite', 1 );
 
 	IF(nCurrentDimensionIndex <= nDimensionCount - 2);
