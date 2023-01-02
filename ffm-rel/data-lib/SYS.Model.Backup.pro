@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"pF21aDR7yk=jafBEa<AgVCtbGk1a00]i@Kqu9C3Ibf_[kdSvE13FLJC8o8>^ho_M^rj8c15[K^YsQ>Mggn2OY:KxY^@BZ7vCf_M4eJpnur@7hc^Nw8KN[>X_lNdEcph8uJ`:RWi69?d;i4u?_jY71>2SYev^4FgFtNG_`OI]Eq_=NI9]A0dRaEFRV^5339mYTgFroW\V"
+565,"zsIYAAL>[XNrQnP>]KYGGeU6]RaiR>hfbfdo^m4KQvwI\QJhL:76mpmq0qThZ6efI==iJV;Z<Zebielq^w<1H4IH<`XJYa_TZzD9wGy:OpOF@N4GesX>q\bkGN?tM0qxq_lftJ9mJa0M2;mw99Qq5egqtLcW_hXx12stBnKpElD=E982l1Ze1htZVW]7<>5_PRd7giw="
 559,1
 928,0
 593,
@@ -52,12 +52,11 @@ pDeleteAfterDays,""
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
-575,18
+575,17
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
-sScript_Location = CellGetS( 'SYS Control', 'Current Environment', 'Scripts Path');
 sDelete_After_Days = pDeleteAfterDays;
 
 ## TODO: Read default from SYS Control cube
@@ -66,7 +65,7 @@ IF( sDelete_After_Days @= '');
 ENDIF;
 
 ExecuteCommand(
-	sScript_Location | '\backup.bat'
+	'..\script\backup.bat'
 	   | IF( sDelete_After_Days @<> ''
 		,' ' | sDelete_After_Days
 		, '')

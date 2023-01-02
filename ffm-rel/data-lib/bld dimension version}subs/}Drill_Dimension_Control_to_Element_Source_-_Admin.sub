@@ -1,11 +1,10 @@
 ﻿283,100
 284,"}Drill_Dimension_Control_to_Element_Source_-_Admin"
-11,20220206223009
+11,20210206041904
 274,
 18,0
-275,
+275,66
+{ TM1SubsetToSet( [BLD Dimension Version], 'Default', 'public' ) }
 278,0
 281,0
-270,2
-v1.0
-v1.1
+270,0

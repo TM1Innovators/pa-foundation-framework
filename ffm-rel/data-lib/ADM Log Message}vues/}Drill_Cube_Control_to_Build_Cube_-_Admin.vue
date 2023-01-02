@@ -10,42 +10,26 @@
 367,0
 376,0
 375,c:0.00
-374,3
+374,2
 7,GBL Date
-6,ALL
-274,
-281,0
-282,
+6,Current Day
 7,ADM Log Source
-6,ALL
-274,
-281,0
-282,
-7,ADM Log Entry
-6,ALL
-274,
-281,0
-282,
+6,Leaf Elements
 360,1
 7,ADM Log Message Measure
-6,ALL
-274,
-281,0
-282,
-371,1
+6,Default
+371,2
+7,ADM Log Entry
+6,All Descending
 7,ADM Log Line
-6,ALL
-274,
-281,0
-282,
-373,3
+6,Default
+373,2
 1,2015-07-01
-1,Processes
-1,Entry 1
-372,0
-372,00
-384,0
-385,0
+9,BLD.Model.Update.All.Cubes
+372,1
+372,11
+384,1
+385,1
 377,4
 0
 0
@@ -59,5 +43,5 @@
 0
 0
 0
-11,20220405013425
-381,0
+11,20210206034330
+381,1

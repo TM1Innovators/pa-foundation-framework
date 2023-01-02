@@ -4,7 +4,7 @@
 586,"\\kracken\TM1 Servers (Kracken)\ffm-dev\export\}20201209194658_526069284_tmp\Dimension_Control_}20201209194658_578819647_tmp.csv"
 585,"\\kracken\TM1 Servers (Kracken)\ffm-dev\export\}20201209194658_526069284_tmp\Dimension_Control_}20201209194658_578819647_tmp.csv"
 564,
-565,"wg`JxeL8Vp1Q\p9_^TFcX2Ealc0`4>oDq8K>rORx995kFKWUm?AXq=]]`x9O;UkgTCcVXt[YnXVCe5[7Z0pXPtAlGOXV;rSj^g7CiSfPBuu4?WO?z35oVIBQ0j7mHWJjQz1o:HFlwlWxfh=09O26r>;zVbDz[SDteN?@F<@0wOW55<veM\dCcBvedkuSqRB`c:gPQ:8h"
+565,"gAeM6leaRPv]C4IUMWP7kYj3c4W\`__^`AnS^ah2nb9ws2ynraJ0BUiH3quK21f[Pz9:tidB7mzAa`j5>>GH5RjeZqEtzm>FQ]@ra0IFQ2;Asxo@GwKvMHjQU\mQ:uo3md5QZ[OI@]P8c\1\k4_@?LSpu?7e`mb7QeIUpBWKAC<O32FK==@wH^7:9EC?JaU]Dti4;3sS"
 559,1
 928,0
 593,
@@ -206,7 +206,7 @@ DataSourceType = 'CHARACTERDELIMITED';
 DatasourceNameForServer = sDimension_Control_Full_Path;
 DatasourceNameForClient = sDimension_Control_Full_Path;
 DatasourceASCIIHeaderRecords = 1;
-573,23
+573,22
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -217,7 +217,6 @@ ENDIF;
 
 sDimension_List = vDimension_List;
 sBuild_Version = IF( pTargetBuildVersion @= '', vBuild_Version, pTargetBuildVersion );
-sBuild_Profile = IF( pTargetBuildProfile @= '', vBuild_Profile, pTargetBuildProfile );
 
 IF( DIMIX( sDimension_List_Dimension_Name, sDimension_List ) = 0);
 	DimensionElementInsert( sDimension_List_Dimension_Name, '', sDimension_List, 'n' );
@@ -227,10 +226,10 @@ IF( DIMIX( sDimension_Version_Dimension_Name, sBuild_Version ) = 0);
 	DimensionElementInsert( sDimension_Version_Dimension_Name, '', sBuild_Version, 'n' );
 ENDIF;
 
-IF( DIMIX ( sBuild_Profile_Dimension_Name, pTargetBuildProfile) = 0 );
-	DimensionElementInsert ( sBuild_Profile_Dimension_Name, '', sBuild_Profile, 'n' );
+IF( pTargetBuildProfile @<> '' & DIMIX ( sBuild_Profile_Dimension_Name, pTargetBuildProfile) = 0 );
+	DimensionElementInsert ( sBuild_Profile_Dimension_Name, '', pTargetBuildProfile, 'n' );
 ENDIF;
-574,109
+574,111
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -241,7 +240,7 @@ ENDIF;
 
 sDimension_List = vDimension_List;
 sBuild_Version = IF( pTargetBuildVersion @= '', vBuild_Version, pTargetBuildVersion );
-sBuild_Profile = IF( pTargetBuildProfile @= '', vBuild_Profile, pTargetBuildProfile );
+
 
 sHierarchy_Import_File_Name = vHierarchy_Source_File_Name;
 
@@ -327,19 +326,21 @@ IF( sProcess_Parameter_Import_File_Name @<> '' & FileExists( sImport_File_Path |
 
 ENDIF;
 
-sAction = IF( pTargetAction @<> '', pTargetAction, 'Include');
-sUpdate_Hierarchy = IF( pTargetUpdateFlag @<> '', pTargetUpdateFlag, vUpdate_Hierarchy );
-sUpdate_Elements = IF( pTargetUpdateFlag @<> '', pTargetUpdateFlag, vUpdate_Elements );
-sUpdate_Subsets = IF( pTargetUpdateFlag @<> '', pTargetUpdateFlag, vUpdate_Subsets );
 
-## Update BLD Dimension Control cube
-CellPutS( sAction, sDimension_Control_Cube_Name, sBuild_Profile, sDimension_List, 'Action' );
-CellPutS( sBuild_Version, sDimension_Control_Cube_Name, sBuild_Profile, sDimension_List, 'Build Version' );
-CellPutS( sUpdate_Hierarchy, sDimension_Control_Cube_Name, sBuild_Profile, sDimension_List, 'Update Hierarchy' );
-CellPutS( sUpdate_Elements, sDimension_Control_Cube_Name, sBuild_Profile, sDimension_List, 'Update Elements' );
-CellPutS( sUpdate_Subsets, sDimension_Control_Cube_Name, sBuild_Profile, sDimension_List, 'Update Subsets' );
+IF( pTargetBuildProfile @<> '' );
 
-ElementAttrPutS( sBuild_Profile, 'BLD Dimension List', 'BLD Dimension List', vDimension_List, 'Default Build Profile' );
+	sAction = IF( pTargetAction @<> '', pTargetAction, 'Include');
+	sUpdate_Hierarchy = IF( pTargetUpdateFlag @<> '', pTargetUpdateFlag, vUpdate_Hierarchy );
+	sUpdate_Elements = IF( pTargetUpdateFlag @<> '', pTargetUpdateFlag, vUpdate_Elements );
+	sUpdate_Subsets = IF( pTargetUpdateFlag @<> '', pTargetUpdateFlag, vUpdate_Subsets );
+
+	## Update BLD Dimension Control cube
+	CellPutS( sAction, sDimension_Control_Cube_Name, pTargetBuildProfile, sDimension_List, 'Action' );
+	CellPutS( sBuild_Version, sDimension_Control_Cube_Name, pTargetBuildProfile, sDimension_List, 'Build Version' );
+	CellPutS( sUpdate_Hierarchy, sDimension_Control_Cube_Name, pTargetBuildProfile, sDimension_List, 'Update Hierarchy' );
+	CellPutS( sUpdate_Elements, sDimension_Control_Cube_Name, pTargetBuildProfile, sDimension_List, 'Update Elements' );
+	CellPutS( sUpdate_Subsets, sDimension_Control_Cube_Name, pTargetBuildProfile, sDimension_List, 'Update Subsets' );
+ENDIF;
 575,17
 
 #****Begin: Generated Statements***

@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"c7wa6`Vn7I>LSFKxYe>N9\:2SIFGZ_c3`j^58Z4dFO4FDSWYIyA[aov]j_Z0NsgtrKLmsPbeOdJHhNfFEHURko_FkxFdSJ:Us:0YrLN2cW`iavS5i_CkVd?Czi[km`sunbH?b\WQumqR7?uo3m=kLBUCGRs6?Cv7P7C9]N31Uw6N86Zi:9WtvsLUFje\HIQ>?P_<]joh"
+565,"iuFQOyX?Vat12[0s42:w9clcZ8k;=iErRy:bYCM8AcbuP10b7Zq_W97LhBqPzniN3`TfA<nkuyq1djov:_Mtpy36U>3ygKSwRLY`[qsVM@1gS2nCkkV@n@<4Xr]yzfVmygrZz@PXUO]68CVG`^W960nb`WkX1T\Sm<UX]n0iNkRv4Kdl[[VuI6CdP9I=IzKaiLbN_Gbb"
 559,1
 928,0
 593,
@@ -38,7 +38,7 @@ pMeasure
 590,4
 cubename,"BLD Cube Control"
 pBuildProfile,"Default"
-pCubeList,"SYS Calendar"
+pCubeList,"REV Sales Import"
 pMeasure,"Action"
 637,4
 cubename,""
@@ -58,7 +58,7 @@ pMeasure,""
 #****End: Generated Statements****
 
 
-ExecuteProcess('BLD.Model.Update.All.Cubes', 'pBuildProfile', pBuildProfile, 'pCubeList', pCubeList, 'pUpdateDimensions', 'No' );
+ExecuteProcess('BLD.Model.Update.All.Cubes', 'pBuildProfile', pBuildProfile, 'pCubeList', pCubeList, 'pUpdateDimensions', 'Yes' );
 573,3
 
 #****Begin: Generated Statements***
@@ -67,11 +67,10 @@ ExecuteProcess('BLD.Model.Update.All.Cubes', 'pBuildProfile', pBuildProfile, 'pC
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
-575,31
+575,30
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
-
 
 StringGlobalVariable('OutputFilteredText');
 sText_Filter_Process_Name = 'Sub.Text.Filter_Chars';
@@ -97,8 +96,8 @@ ViewTitleElementSet('ADM Log Message', sTarget_View_Name, 'ADM Log Source', sSel
 
 # RETURNVIEWHANDLE('ADM Log Message', sTarget_View_Name);
 
-RETURNVIEWHANDLE('ADM Log Message', sTarget_View_Name);
 
+RETURNVIEWHANDLE('ADM Log Message', sTarget_View_Name);
 576,CubeAction=1511DataAction=1503CubeLogChanges=0
 930,0
 638,1
