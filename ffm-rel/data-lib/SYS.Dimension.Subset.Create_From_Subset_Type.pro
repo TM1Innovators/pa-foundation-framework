@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"vfSmAVLTIz^^[ky6sfMqY5apMCunAwk8v\w@]Jvlt\4GrIowk5H2B@c>cDR9eDiN5t1=pfL?s_bpzD=I;c=Y44k4_wx2ri@C7wLdAl67SW_fst3a8@vD]qg=mglg9q^uZ[F7e]=y<r3y@fEWh5yflWULTt7swyRogasIhRG0c[0cF6t\NfAJBifCZ:xaVrZdlxO_QxzL"
+565,"ptGFQc7N>jMYMjd]a4\F8v63E0UM1O2>OweH[5>pXWtv_Y\2Ts4sSf`V_v=mkd>]JMk<OG`naBQ7AqP@KdSp_BVikEBC6hLE7ww41bvq3C78>=J7C13z\n]mUyEQVerCGeomL<8:xNpPz;\mua`PHrVho8aoJozR5^Axj]YWszw5i`k4gMPoIqVNl3l9s5::29XfCkbr"
 559,1
 928,0
 593,
@@ -25,15 +25,17 @@
 569,0
 592,0
 599,1000
-560,7
-pSubsetType
+560,8
+pElementType
 pDimensionName
 pHierarchyName
 pSelectionElement
 pSelectionText
 pSubsetName
+pSubsetType
 pOverwrite
-561,7
+561,8
+2
 2
 2
 2
@@ -41,21 +43,23 @@ pOverwrite
 2
 2
 1
-590,7
-pSubsetType,""
+590,8
+pElementType,""
 pDimensionName,""
 pHierarchyName,""
 pSelectionElement,""
 pSelectionText,""
 pSubsetName,""
+pSubsetType,"pSubsetType: ""Static"" or ""Dynamic"""
 pOverwrite,1
-637,7
-pSubsetType,""
+637,8
+pElementType,""
 pDimensionName,""
 pHierarchyName,""
 pSelectionElement,""
 pSelectionText,""
 pSubsetName,""
+pSubsetType,""
 pOverwrite,""
 577,0
 578,0
@@ -124,15 +128,15 @@ ELSE;
 ENDIF;
 
 
-IF(pSubsetType @<> '');
+IF(pElementType @<> '');
 
 	sElement_Name = pSelectionElement;
 	sText_Value = pSelectionText;
-	sMDX = ATTRS( sSubsetTypeDimensionName, pSubsetType, 'MDX' );
+	sMDX = ATTRS( sSubsetTypeDimensionName, pElementType, 'MDX' );
 
 	HierarchySubsetMDXSet( sDimension_Name, sHierarchy_Name, sSubsetName, EXPAND( sMDX ));
 
-	IF( pSubsetType @= 'Static');
+	IF( pSubsetType @<> 'Dynamic');
 		HierarchySubsetMDXSet( sDimension_Name, sHierarchy_Name, sSubsetName, '' );
 	ENDIF;
 ELSE;

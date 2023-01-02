@@ -3,5 +3,6 @@
 	'Cube Control to Cube Source'
 	| ',Cube Control to View Source'
 	| ',Cube Control to Build Cube'
+	| ',Cube Control to Build Cube with Dimensions'
 	| ',Cube Control to Log Message'
 ;
