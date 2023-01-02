@@ -1,0 +1,31 @@
+﻿FORMAT==100
+['Hierarchy Element Source','Value'] = S:
+	IF(
+		DB('BLD Dimension Source'
+			,!BLD Dimension List
+			,!BLD Hierarchy List
+			,!BLD Dimension Version
+			,!BLD Hierarchy Level
+			,'Hierarchy Element Basis') @<> 'Subset'
+		,'subset:BLD Hierarchy List:All Hierarchies'
+		,'dimension:}Subsets_'
+		 | IF(
+			DB('BLD Dimension Source'
+				,!BLD Dimension List
+				,'Primary'
+				,DB('BLD Dimension Control'
+					,'All'
+					,!BLD Dimension List
+					,'Build Version')
+				,'All Hierarchy Level'
+				,'Dimension Name') @<> ''
+			,DB('BLD Dimension Source'
+				,!BLD Dimension List
+				,'Primary'
+				,DB('BLD Dimension Control'
+					,'All'
+					,!BLD Dimension List
+					,'Build Version')
+				,'All Hierarchy Level'
+				,'Dimension Name')
+			,!BLD Dimension List));
