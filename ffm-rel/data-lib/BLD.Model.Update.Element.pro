@@ -4,7 +4,7 @@
 586,"BLD Element Source"
 585,"BLD Element Source"
 564,
-565,"c`Oapx^;prUa^1fw`^?N3sYMwW]5HCB]OPV;[h\llb5NWh8znM>bWwbTWW84wAJu<Q6n61N:axifS2?TFHn2<hmNTvhMb34V`hrlj4uo<o1V4qz5szki;uSlXVxHrNg:FDroQRQV7cIIojC8;s^58@Wu:G^^C\>Z]L<asFW?kUw[qL?bT=7TtjnRht\@mLU=EIvk\paa"
+565,"t9f5eLSutq1VnbE=BVz3aR_2^sJIT_6\q@0`K?eIph[tj`QxLiw5eP7UKD@qfvLD38YXGmp[gcCl1dJg[5JlH0UCBNBKk@MMwoCDeEOU^_=aY]D[emuq?4HV=RYE0>7MvD>Ny5aE74ze]PEe=ye;dR5:j_^RWwtFEodJa`5P[xH@m`^Fh7URr<5U_an<jLFxmThu\RYW"
 559,1
 928,0
 593,
@@ -365,7 +365,7 @@ sCurrent_Element_Weight = CellGetS(sSource_Cube_Name, pDimensionList, pHierarchy
 nCurrent_Element_Weight = NUMBR(sCurrent_Element_Weight);
 
 sCurrent_Element_Type_Code = 'n';
-IF(sCurrent_Element_Type @= 'Consolidated');
+IF(sCurrent_Element_Type @= 'Consolidation');
 	sCurrent_Element_Type_Code = 'c';
 ELSEIF(sCurrent_Element_Type @= 'String');
 	sCurrent_Element_Type_Code = 's';

@@ -4,7 +4,7 @@
 586,"BLD Element Source"
 585,"BLD Element Source"
 564,
-565,"kz0ed13g^T8aOvl\i:deyKc6P^;2^v]6>1U<T^`fF:hybh=5fxfnt0j3wsZqC2ekZIB917c2l0\9xA1mfewLJX<_1k1batVgXFi3r2qri>KtY:yuT04;qGFSgo^Y`c6`xV=ebkA2<uJ?>m^I>F]DwGLlQ6n2aKb\Mqi>w:K<lq:MK`H:Caa5U7WFD_hpo^l;747mi5xD"
+565,"ux:30O6gw>fM3sa9Um?c]a^FeOR7Ecuxs\g?sXMjkjwAG72x0CP:V;XV<^o=hf:2wi6utDoH79qwNsYiSiCg415\VnKzcbWpxuIf=j4fy?7BkRgtnWyGJBrKF=TIDDsMBC;M`VrV;6P9:x<mXTZgGY?9E]RTgQe[g?uRC7xSONFz=\fBAGLGEKY\TfaMT[^Y=DQEZM=\"
 559,1
 928,0
 593,
@@ -131,7 +131,7 @@ VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 603,0
-572,203
+572,209
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -223,7 +223,11 @@ sDimension_Name = CellGetS( sDimension_Source_Cube_Name, pDimensionList, pHierar
 sDimension_Name = IF( sDimension_Name @= '', pDimensionList, sDimension_Name);
 sHierarchy_Name = CellGetS( sDimension_Source_Cube_Name, pDimensionList, pHierarchyList, sHierarchy_Version, 'All Hierarchy Level', 'Hierarchy Name' );
 sHierarchy_Name = IF( sHierarchy_Name @= '', sDimension_Name, sHierarchy_Name);
-sHierarchy_Element_Source = CellGetS( sDimension_Source_Cube_Name, pDimensionList, pHierarchyList, sHierarchy_Version, 'All Hierarchy Level', 'Hierarchy Element Source' );
+
+sHierarchy_Element_Basis = CellGetS( sDimension_Source_Cube_Name, pDimensionList, pHierarchyList, sHierarchy_Version, 'All Hierarchy Level', 'Hierarchy Element Basis' );
+IF(sHierarchy_Element_Basis @<> 'Subset');
+	sHierarchy_Element_Source = CellGetS( sDimension_Source_Cube_Name, pDimensionList, pHierarchyList, sHierarchy_Version, 'All Hierarchy Level', 'Hierarchy Element Source' );
+ENDIF;
 sHierarchy_Element_Source = IF( sHierarchy_Element_Source @= '', 'Primary', sHierarchy_Element_Source);
 
 
@@ -246,15 +250,17 @@ ENDIF;
 sFin_Year_Attribute_Name = CellGetS( sAttribute_Source_Cube_Name, pDimensionList, sHierarchy_Element_Source, sHierarchy_Version,  ATTRS( 'BLD Element Source Measure', pFinYearAttributeName, 'Attribute_Item_Mapping'), 'Attribute Name');
 sDate_Serial_Attribute_Name = CellGetS( sAttribute_Source_Cube_Name, pDimensionList, sHierarchy_Element_Source, sHierarchy_Version, ATTRS( 'BLD Element Source Measure', pDateSerialAttributeName, 'Attribute_Item_Mapping'), 'Attribute Name');
 
+ASCIIOUTPUT( '..\hier_params.txt', pFinYearAttributeName, ATTRS( 'BLD Element Source Measure', pFinYearAttributeName, 'Attribute_Item_Mapping'), sFin_Year_Attribute_Name);
+
 IF( sFin_Year_Attribute_Name @= '');
 	nError_Occurred = 1;
-	sError_Message = 'The pFinYearAttributeName parameter was blank for specified dimension [' | pDimensionList | '>>' | sDimension_Name | '] and hierarchy [' | pHierarchyList | '>>' | sHierarchy_Name | '] . This is necessary to resolve the balance hierarchy. Aborting process.';
+	sError_Message = 'The pFinYearAttributeName parameter was invalid or blank for specified dimension [' | pDimensionList | '>>' | sDimension_Name | '] and hierarchy [' | pHierarchyList | '>>' | sHierarchy_Name | '] . This is necessary to resolve the balance hierarchy. Aborting process.';
 	ProcessBreak;
 ENDIF;
 
 IF(  sDate_Serial_Attribute_Name @= '' );
 	nError_Occurred = 1;
-	sError_Message = 'The pDateSerialAttributeName parameter was blank for specified dimension [' | pDimensionList | '>>' | sDimension_Name | '] and hierarchy [' | pHierarchyList | '>>' | sHierarchy_Name | '] . This is necessary to resolve the balance hierarchy. Aborting process.';
+	sError_Message = 'The pDateSerialAttributeName parameter was invalid or blank for specified dimension [' | pDimensionList | '>>' | sDimension_Name | '] and hierarchy [' | pHierarchyList | '>>' | sHierarchy_Name | '] . This is necessary to resolve the balance hierarchy. Aborting process.';
 	ProcessBreak;
 ENDIF;
 
