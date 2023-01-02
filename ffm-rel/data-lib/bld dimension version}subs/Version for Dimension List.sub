@@ -1,0 +1,11 @@
+﻿283,100
+284,"Version for Dimension List"
+11,20210922022704
+274,
+18,0
+275,240
+{ StrToSet('{[BLD Dimension Version].['    + ( [BLD Dimension Control].(          [BLD Build Profile].[All],           [BLD Dimension List].CurrentMember,           [BLD Dimension Control Measure].[Build Version]      ))    + ']}' )}
+278,0
+281,0
+270,1
+v1.0
